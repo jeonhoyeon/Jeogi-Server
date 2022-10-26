@@ -13,14 +13,14 @@ window.addEventListener("DOMContentLoaded", () => {
   console.log('바로실행');
 
   // 미완
-  const req = { u_id: "로그인할 때 세션에 저장되어지는 u_id값" };
+  const req = { u_id: "맹구" };
   const arrReq = [];
   arrReq.push(req);
 
   console.log(req);
   console.log(JSON.stringify(req));
 
-  fetch("/myCourse/myCourseSite", {
+  fetch("/myCourse/myCourse", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(arrReq),
