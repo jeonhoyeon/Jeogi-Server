@@ -21,6 +21,7 @@ public class MyCourseRController {
 	// 내코스 리스트 업
 	@PostMapping("/myCourse/myCourse")
 		public ArrayList<MyCourseDto> getMyData(@RequestBody ArrayList<JSONObject> inputData) throws ParseException {
+			System.out.println("11111"+inputData.toString());
 			ArrayList<MyCourseDto> result = myCourseService.getMyCourse(inputData);
 			return result;
 		}

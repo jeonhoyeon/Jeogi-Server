@@ -84,7 +84,7 @@ ingiSearch.addEventListener("click", () => {
   };
   const arrReq = [];
   arrReq.push(req);
-  
+
   fetch("/popularCourse/getCatCourse", {
     method: "POST",
     headers: { "Content-Type": "application/json" },

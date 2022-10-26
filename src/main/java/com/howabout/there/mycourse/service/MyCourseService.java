@@ -21,6 +21,7 @@ public class MyCourseService implements IMyCourseService {
 	
 	public ArrayList<MyCourseDto> getMyCourse (ArrayList<JSONObject> myInfo)throws ParseException{
 		String myId = myInfo.get(0).get("u_id").toString();
+		System.out.println("22222"+myId);
 		ArrayList<MyCourseDto> myDataCourse = courseDao.getMyCourse(myId);
 		return myDataCourse;
 	}

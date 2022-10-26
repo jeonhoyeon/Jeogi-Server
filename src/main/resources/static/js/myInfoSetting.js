@@ -11,14 +11,14 @@ let nickPass = false;
 
 window.addEventListener("DOMContentLoaded", () => {
   const req = {
-    u_id: "맹구",
+    u_id: "leehj",
   };
   const arrReq = [];
   arrReq.push(req);
 
   fetch("/myPage/myInfo/webDatasetting", {
     method: "POST",
-    headers: { "Content-Type": "applycation/json" },
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify(arrReq),
   })
     .then((response) => response.json())
