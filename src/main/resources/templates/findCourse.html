@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Find Course</title>
+    <link rel="stylesheet" href="/css/findCourse.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
+  </head>
+  <body>
+    <script
+      type="text/javascript"
+      src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5b1cf534f0124bbf03d02def34505c63&libraries=services,clusterer,drawing"
+    ></script>
+    <!-- header -->
+    <header class="find-course__header">
+      <div>
+        <a href="/mainPage">
+          <img
+            src="../images/logo_white.png"
+            alt="logo"
+            id="jeogi-logo__img"
+            width="180px"
+          />
+        </a>
+      </div>
+      <nav class="find-course__nav__list">
+        <ul>
+          <li>
+            <a href="/popularCourse">인기코스</a>
+          </li>
+          <li>
+            <a href="/findCourse/webCourse" style="border-bottom: 2px solid white">
+              코스찾기
+            </a>
+          </li>
+          <li>
+            <a href="/myCourse/myCourseSite">내코스</a>
+          </li>
+          <li>
+            <a href="/myPage/myInfo/webData">마이페이지</a>
+          </li>
+          <li>
+            <a href="/login/signIn">로그인</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <!-- header -->
+
+    <!-- main-content -->
+    <main>
+      <article class="find-course__container">
+        <!-- kakao map api -->
+        <div class="find-course__map">
+          <div id="map"></div>
+        </div>
+        <!-- kakao map api -->
+
+        <!-- search place -->
+        <div class="find-course-list__container">
+          <form action="" onsubmit="searchPlaces(); return false;">
+            <div class="find-course__search">
+              <span class="material-symbols-outlined" id="search_icon">
+                search
+              </span>
+              <input
+                type="text"
+                id="find-course__searchbar"
+                placeholder="주변 맛집과 카페를 검색할 장소를 입력하세요."
+              />
+              <span
+                class="material-symbols-outlined"
+                id="location_button"
+                onclick="getCurrentPosBtn()"
+              >
+                my_location
+              </span>
+            </div>
+          </form>
+
+          <!-- contents ( 10개 ) -->
+          <section>
+            <div class="res-container">
+              <button type="button">식당</button>
+              <button type="button" class="res-button" value="300">300m</button>
+              <button type="button" class="res-button" value="600">600m</button>
+              <button type="button" class="res-button" value="900">900m</button>
+              <button type="button" class="res-button" value="1200">
+                1200m
+              </button>
+            </div>
+            <div class="cafe-container">
+              <button type="button">카페</button>
+              <button type="button" class="cafe-button" value="300">
+                300m
+              </button>
+              <button type="button" class="cafe-button" value="600">
+                600m
+              </button>
+              <button type="button" class="cafe-button" value="900">
+                900m
+              </button>
+              <button type="button" class="cafe-button" value="1200">
+                1200m
+              </button>
+            </div>
+            <div class="right-box3">
+              <ul id="placesList"></ul>
+              <div id="pagination"></div>
+            </div>
+          </section>
+          <!-- contents -->
+        </div>
+        <!-- search place -->
+      </article>
+    </main>
+    <!-- main-content -->
+
+    <!-- kakao map api - javascript -->
+    <!-- <script
+      type="text/javascript"
+      src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5b1cf534f0124bbf03d02def34505c63"
+    ></script> -->
+    <script src="/js/findCourseMap.js"></script>
+    <script src="/js/findCourse.js"></script>
+    <!-- kakao map api - javascript -->
+  </body>
+</html>
