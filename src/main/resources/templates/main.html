@@ -27,10 +27,10 @@
             <a href="/findCourse/webCourse">코스찾기</a>
           </li>
           <li>
-            <a href="/myCourse/myCourseSite">내코스</a>
+            <a id="myCourseLocation">내코스</a>
           </li>
           <li>
-            <a th:href="@{/myPage/myInfo/webData(myData = 'leehj')}">마이페이지</a>
+            <a id="myPageLocation" style="cursor:pointer;">마이페이지</a>
           </li>
           <li>
             <a href="/login/signIn">로그인</a>
@@ -69,7 +69,7 @@
         </div>
 
         <div class="test2">
-          <div class="test2_1" onclick="location.href='/myCourse/myCourseSite'">
+          <div class="test2_1" id="myPageContainerLocation">
             <span>내코스</span>
           </div>
           <div class="test2_2">
