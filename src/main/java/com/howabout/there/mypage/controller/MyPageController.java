@@ -15,50 +15,44 @@ import com.howabout.there.mypage.service.MyPageService;
 
 @Controller
 public class MyPageController {
-	
+
 	@Autowired
 	MyPageService myPageService;
-	
+
 	@GetMapping("/myCourse/myCourse/myCourse")
 	public String testtest() {
 		return "login";
 	}
-	
-	//홈페이지 테스트 내정보페이지
-	@GetMapping("/myPage/myInfo/testwebData")
-	public String testwebMyInfo(Model model) {
-		UserDto userDto = new UserDto("Tutic", "testman", "1234", "2022-10-07 18:28:37", 1);
-		model.addAttribute("myInfo", userDto);
-		return "myInfo";
-	}
-	//홈페이지 테스트 정보변경페이지
-	@GetMapping("/testmyinfoset")
-	public String dasdwadasdasd(Model model) {
-		UserDto userDto = new UserDto("Tutic", "testman", "1234", "2022-10-07 18:28:37", 1);
-		model.addAttribute("myInfo", userDto);
-		return "myInfoSetting";
-	}
-	
+
 	// 이게 진짜 myInfo 요청 web용
-	@PostMapping("/myPage/myInfo/webData")
-	public String webMyInfo(@RequestBody ArrayList<JSONObject> myData, Model model) {
-		UserDto userUp = myPageService.userListUp(myData);	
+	@GetMapping("/myPage/myInfo/webData")
+	public String webMyInfo(String myData, Model model) {
+		System.out.println("MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM");
+		ArrayList<JSONObject> aa = new ArrayList<>();
+		JSONObject bb = new JSONObject();
+		bb.put("u_id", myData);
+		aa.add(bb);
+		UserDto userUp = myPageService.userListUp(aa);
 		model.addAttribute("myInfo", userUp);
 		return "myInfo";
 	}
+
 	// 이게 진짜 myInfoSetting 요청 web용
-	@PostMapping("/myPage/myInfo/webDatasetting")
-	public String webMyInfoSetting(@RequestBody ArrayList<JSONObject> myData, Model model) {
-		UserDto userUp = myPageService.userListUp(myData);	
+	@GetMapping("/myPage/myInfo/webDatasetting")
+	public String webMyInfoSetting(@RequestBody String myData, Model model) {
+		ArrayList<JSONObject> aa = new ArrayList<>();
+		JSONObject bb = new JSONObject();
+		bb.put("u_id", myData);
+		aa.add(bb);
+		UserDto userUp = myPageService.userListUp(aa);
 		model.addAttribute("myInfo", userUp);
 		return "myInfoSetting";
 	}
+
 	// 회원탈퇴 홈페이지
 	@GetMapping("/myCourse/myCourse/webwithdrawal")
 	public String webWithDrawalSite() {
 		return "withdrawal";
 	}
-		
-		
-	
+
 }

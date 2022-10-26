@@ -11,7 +11,7 @@ let nickPass = false;
 
 window.addEventListener("DOMContentLoaded", () => {
   const req = {
-    u_id: "세션에 저장되어 있는 u_id",
+    u_id: "맹구",
   };
   const arrReq = [];
   arrReq.push(req);

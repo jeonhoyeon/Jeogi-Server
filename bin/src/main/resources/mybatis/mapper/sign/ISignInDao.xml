@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.howabout.there.sign.dao.ISignInDao">
+	<!-- u_id, u_pw가 똑같은 user의 정보 가져오기 -->
+	<select id="userData"
+		resultType="com.howabout.there.sign.vo.UserVo"> 
+		SELECT u_nick, u_id
+		FROM user
+		WHERE u_id = #{param1} AND u_pw = #{param2} AND u_flag = "1"; </select>
+	<!-- u_id 가 존재하는지 체크 -->
+	<select id="findError" resultType="Integer"> SELECT IF(COUNT(*) = 1, 1, 0)
+		FROM user WHERE u_id = #{u_id} AND u_flag = 1; 
+	</select>
+	
+	<!-- 내아이디 찾기 -->
+	<select id="findMyId" resultType="String">
+		SELECT u_id 
+		FROM user
+		WHERE u_nick = #{u_nick} AND birth = #{birth};
+	</select>
+	<!-- 비밀번호 찾기전 내정보 확인 -->
+	<select id="checkMyInfo" resultType="Integer" >
+		SELECT count(*)
+		FROM user
+		WHERE u_id = #{u_id} AND u_nick = #{u_nick} AND birth = #{birth};
+	</select>
+	<!-- 비밀번호 재설정 -->
+	<update id="setMyPw">
+		UPDATE user
+		SET u_pw=#{u_pw}
+		WHERE u_id = #{id};
+	</update>
+	
+	
+	
+	
+	
+</mapper>

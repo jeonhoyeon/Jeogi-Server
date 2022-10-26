@@ -47,7 +47,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
         fetch("/popularCourse/getSi", {
           method: "POST",
-          headers: { "Content-Type": "applycation/json" },
+          headers: { "Content-Type": "application/json" },
           body: JSON.stringify(req),
         })
           .then((response) => response.json())
@@ -82,10 +82,13 @@ ingiSearch.addEventListener("click", () => {
     location_do: ingiDo.value,
     location_si: ingiSi.value,
   };
+  const arrReq = [];
+  arrReq.push(req);
+  
   fetch("/popularCourse/getCatCourse", {
     method: "POST",
-    headers: { "Content-Type": "applycation/json" },
-    body: JSON.stringify(req),
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(arrReq),
   })
     .then((response) => response.json())
     .then((ingiData) => {
