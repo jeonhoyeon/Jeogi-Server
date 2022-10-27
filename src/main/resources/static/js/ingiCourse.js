@@ -7,6 +7,7 @@ const ingiAge = document.getElementById("ingi-age");
 const ingiDo = document.getElementById("ingi-do");
 const ingiSi = document.getElementById("ingi-si");
 const ingiSearch = document.getElementById("ingi-search");
+const items = document.getElementById("items");
 
 // 마커를 담을 배열
 let markers = [];
@@ -76,6 +77,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
 // 모든 옵션을 선택한 후, 검색버튼을 눌렀을 때의 이벤트 시작
 ingiSearch.addEventListener("click", () => {
+	removeAllChildNods(items);
   const req = {
     gender: ingiGender.value,
     age: ingiAge.value,
@@ -254,5 +256,11 @@ function addItems(dateInfo) {
     });
 
     // 아이템 클릭 이벤트 끝
+  }
+}
+
+function removeAllChildNods(el) {
+  while (el.hasChildNodes()) {
+    el.removeChild(el.lastChild);
   }
 }

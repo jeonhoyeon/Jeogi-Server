@@ -1,3 +1,4 @@
+const userEmail = document.getElementById("user_email");
 const userId = document.getElementById("user_id");
 const userPw = document.getElementById("user_pw");
 const userPwRe = document.getElementById("user_pw_re");
@@ -6,6 +7,7 @@ const birthYear = document.getElementById("birth-year");
 const birthMonth = document.getElementById("birth-month");
 const birthDay = document.getElementById("birth-day");
 const form = document.getElementById("signup-form");
+const email_error = document.getElementById("email_error");
 const id_error = document.getElementById("id_error");
 const pw_error = document.getElementById("pw_error");
 const pw_re_error = document.getElementById("pw_re_error");
@@ -27,6 +29,7 @@ const aaa = document.getElementById("user_id");
 const signup = () => {
   alert("가입완료");
   const req = {
+    u_email: userEmail.value,
     u_id: userId.value,
     u_pw: userPw.value,
     u_nick: userNick.value,
@@ -53,6 +56,36 @@ const signup = () => {
     });
   //});
 };
+
+//이메일 입력창 start
+userEmail.addEventListener("blur", () => {
+  if (userEmail.value == "") {
+    email_error.innerHTML = "필수 입력 값입니다.";
+    email_error.classList.add("error-design");
+  } else {
+    email_error.classList.remove("error-design");
+    const req = {
+      u_email: userEmail.value,
+    };
+
+    // console.log(req);
+    console.log(JSON.stringify(req));
+    fetch("/login/signUp/EmailCheck", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(req),
+    })
+      .then((response) => response.json())
+      .then((uEmail) => {
+        console.log("response : " + uEmail + "TYPE : " + typeof data);
+        if (Number(uEmail) == 1) {
+          email_error.innerHTML = "사용할 수 있는 이메일입니다.";
+        } else {
+          //alert("중복인 것 같은데요?");
+        }
+      });
+  }
+});
 
 // 아이디 입력창 start
 userId.addEventListener("blur", () => {

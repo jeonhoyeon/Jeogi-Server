@@ -1,3 +1,4 @@
+const user_id = document.getElementById("user_id");
 const new_password = document.getElementById("new_password");
 const re_new_password = document.getElementById("re-new_password");
 const new_nickname = document.getElementById("new-nickname");
@@ -10,23 +11,22 @@ let passPass = false;
 let nickPass = false;
 
 window.addEventListener("DOMContentLoaded", () => {
-  const req = {
-    u_id: "leehj",
-  };
+  const req = { u_id : "leehj" };
   const arrReq = [];
   arrReq.push(req);
 
-  fetch("/myPage/myInfo/webDatasetting", {
+  console.log(arrReq);
+  console.log(JSON.stringify(arrReq));
+  fetch("/myPage/myInfo/getMyData", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(arrReq),
   })
     .then((response) => response.json())
-    .then((myPageData) => {
-      // 페이지를 보내주면 어떻게 띄울 수 있는지 확인
+    .then((getMyData) => {
+      //서버에서 u_id 보내줌
     });
 });
-
 
 // new password checked
 re_new_password.addEventListener("blur", () => {
@@ -68,26 +68,35 @@ new_nickname.addEventListener("blur", () => {
 save_data.addEventListener("click", () => {
   if (passPass == true && nickPass == true) {
     const req = {
-      new_password: new_password.value,
-      re_new_password: re_new_password.value,
-      new_nickname: new_nickname.value,
-      new_gender: document.querySelector('input[name="new-gender"]:checked')
-        .value,
-      new_birth:
+	  u_nick: new_nickname.value,
+      u_pw: new_password.value,
+      gender: document.querySelector('input[name="new-gender"]:checked').value,
+      birth:
         new_birth_year.value +
         "-" +
         new_birth_month.value +
         "-" +
         new_birth_day.value,
     };
+    const arrReq = [];
+    arrReq.push(req);
 
-    console.log(req);
-    console.log(JSON.stringify(req));
-
-    alert("회원정보가 수정되었습니다.");
+    console.log(arrReq);
+    console.log(JSON.stringify(arrReq));
+      fetch("/myPage/myInfo/updateInfo", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(arrReq),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+    if(Number(data) == 1) {
+		alert("회원정보가 수정되었습니다.");
     location.href = "./myInfo.html";
-  } else {
-    alert("");
+	} else {
+		alert("다시 확인하세요.");
+	} 
+    });
   }
 });
 // user info saved

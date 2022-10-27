@@ -59,10 +59,7 @@
 			<!-- thymeleaf -->
 
 			<div class="my-info__change">
-				<button type="button" onclick="location.href='/myPage/myInfo/webDatasetting'"
-					th:onclick="|location.href='@{/myPage/myInfo/webDatasetting/{myData}/(myData = ${'leehj'})}'|">
-					정보수정
-				</button>
+				<button type="button" th:onclick="|location.href='@{/myPage/myInfo/webDatasetting(myData=${myInfo.u_id})}'|">수정</button>
 				<button type="button" onclick="location.href='/myCourse/myCourse/webwithdrawal'">
 					회원탈퇴
 				</button>

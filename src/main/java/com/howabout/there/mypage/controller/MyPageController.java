@@ -26,7 +26,7 @@ public class MyPageController {
 
 	// 이게 진짜 myInfo 요청 web용
 	@GetMapping("/myPage/myInfo/webData")
-	public String webMyInfo(@RequestBody String myData, Model model) {
+	public String webMyInfo( String myData, Model model) {
 		System.out.println("MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM");
 		ArrayList<JSONObject> aa = new ArrayList<>();
 		JSONObject bb = new JSONObject();
@@ -39,7 +39,7 @@ public class MyPageController {
 
 	// 이게 진짜 myInfoSetting 요청 web용
 	@GetMapping("/myPage/myInfo/webDatasetting")
-	public String webMyInfoSetting(@RequestBody String myData, Model model) {
+	public String webMyInfoSetting(String myData, Model model) {
 		ArrayList<JSONObject> aa = new ArrayList<>();
 		JSONObject bb = new JSONObject();
 		bb.put("u_id", myData);

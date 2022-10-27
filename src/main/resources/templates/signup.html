@@ -23,6 +23,16 @@
         <form action="192.168.0.158/sign/signUp" method="post" id="signup-form">
           <div class="signup-info">
             <input
+            type="text"
+            id="user_email"
+            name="user_email"
+            placeholder="이메일"
+            required
+            />
+
+            <div id="email_error"></div>
+            
+            <input
               type="text"
               id="user_id"
               name="user_id"

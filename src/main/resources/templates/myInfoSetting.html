@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -49,17 +49,16 @@
 
         <div class="my-info-setting__data">
           <span>아이디</span>
-          <input type="text" th:value="${myInfo.u_id}" disabled />
+          <input type="text" disabled id="user_id"/>
           <span>새 비밀번호</span>
-          <input type="password" th:value="${myInfo.u_pw}" id="new_password" />
+          <input type="password" id="new_password" />
           <span>새 비밀번호 확인</span>
           <input
             type="password"
-            th:value="${myInfo.u_pw}"
             id="re-new_password"
           />
           <span>닉네임</span>
-          <input type="text" th:value="${myInfo.u_nick}" id="new-nickname" />
+          <input type="text" id="new-nickname" />
           <div class="gender-box">
             <span id="gender-box__choice">성별</span>
             <div class="gender-box__input">
