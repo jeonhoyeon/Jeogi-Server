@@ -10,9 +10,17 @@ myPageLocation.addEventListener("click", () => {
 		headers: { "Content-Type": "application/json" },
 		body: req,
 	})
-		.then((response) => response.json())
-		.then((myPage) => {
-			console.log("data: " + myPage + ", 타입: " + typeof (myPage))
+		.then((response) => response.text())
+		.then((html) => {
+			let parser = new DOMParser();
+			let doc = parser.parseFromString(html, 'text/html');
+
+			console.log(doc);			
+			// document.body.innerHTML = html;
+
+		})
+		.catch((err) => {
+			console.log("Failed to fetch page: ", err)
 		})
 
 })
