@@ -61,13 +61,15 @@
 .find-course-list__container {
   /* width: 25em; */
   flex: 1;
-  padding-right: 1em;
+  padding-right: 0.75em;
   text-align: center;
 }
 
 .choice-container {
 	flex: 1;
-	padding-right: 1em;
+	padding-right: 0.5em;
+	padding-left: 0.75em;
+	border-left: 2px solid #eee; 	
 }
 
 .choice-list-container {
@@ -84,7 +86,12 @@
 }
 
 .choice-list-container > div:last-child {
+	flex: 0;
 	border-bottom: none;
+}
+
+.choice-list-container > div:last-child button {
+	width: 100%;
 }
 
 .find-course__search {

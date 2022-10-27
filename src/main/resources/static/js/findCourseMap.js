@@ -1,10 +1,23 @@
 const secondArea = document.getElementById("resChoice");
 const thirdArea = document.getElementById("cafeChoice");
 const addDateListButton = document.getElementsByClassName("addDateListButton");
+const choiceComplete = document.getElementById("choiceComplete");
+
+let startPosition, secondPosition, thirdPosition;
 
 //마커를 담을 배열
 var markers = [];
+let polylines = [];
+
 let customoverlays = [];
+
+choiceComplete.addEventListener("click", () => {
+	removeMarker();
+	addMarker(startPosition, null);
+	addMarker(secondPosition, null);
+	addMarker(thirdPosition, null);
+	addPolyline(startPosition, secondPosition, thirdPosition);
+})
 
 var mapContainer = document.getElementById("map"), // 지도를 표시할 div
 	mapOption = {
@@ -38,7 +51,7 @@ function locationLoadSuccess(pos) {
 
 	// 이상하게 뜨는 건 여전함
 	// marker.setMap(map);
-	
+
 	// ================================== 현재위치를 기준으로 검색을 해서 선택할 수 있게 보여줘야함 ==================================
 	addItems(pos, startChoice);
 	// ================================== 현재위치를 기준으로 검색을 해서 선택할 수 있게 보여줘야함 ==================================
@@ -150,6 +163,7 @@ function placesSearchCB(data, status, pagination) {
 			console.log(data[i].road_address_name);
 			console.log(data[i].address_name);
 			console.log(data[i].y + ", " + data[i].x);
+			startPosition = new kakao.maps.LatLng(data[i].y, data[i].x);
 
 			// 시작 영역에 띄울 거임
 			const startChoice = document.getElementById("startChoice");
@@ -183,6 +197,8 @@ function placesSearchCB(data, status, pagination) {
 			// 레스토랑 검색
 			for (let j = 0; j < resButton.length; j++) {
 				resButton[j].addEventListener("click", () => {
+					removeCustomOverlayee();
+
 					console.log(data[i].y + ", " + data[i].x);
 
 					var places = new kakao.maps.services.Places();
@@ -198,6 +214,8 @@ function placesSearchCB(data, status, pagination) {
 			// 카페 검색
 			for (let k = 0; k < cafeButton.length; k++) {
 				cafeButton[k].addEventListener("click", () => {
+					removeCustomOverlayee();
+
 					console.log(data[i].y + ", " + data[i].x);
 					var places = new kakao.maps.services.Places();
 
@@ -229,6 +247,8 @@ function secondPlacesSearchCB(data, status, pagination) {
 			console.log(data[i].road_address_name);
 			console.log(data[i].address_name);
 			console.log(data[i].y + ", " + data[i].x);
+			
+			secondPosition = new kakao.maps.LatLng(data[i].y, data[i].x);
 
 			// 시작 영역에 띄울 거임
 			addItems(data[i], secondArea);
@@ -253,6 +273,8 @@ function thirdPlacesSearchCB(data, status, pagination) {
 			console.log(data[i].road_address_name);
 			console.log(data[i].address_name);
 			console.log(data[i].y + ", " + data[i].x);
+
+			thirdPosition = new kakao.maps.LatLng(data[i].y, data[i].x);
 
 			// 시작 영역에 띄울 거임
 			addItems(data[i], thirdArea);
@@ -393,6 +415,13 @@ function displayPlaces(places) {
 	map.setBounds(bounds);
 }
 
+function removeCustomOverlayee() {
+	for (let i = 0; i < customoverlays.length; i++) {
+		customoverlays[i].setMap(null);
+	}
+	customoverlays = [];
+}
+
 // 검색결과 항목을 Element로 반환하는 함수입니다
 function getListItem(index, places) {
 	var el = document.createElement("li"),
@@ -508,4 +537,28 @@ function removeAllChildNods(el) {
 	while (el.hasChildNodes()) {
 		el.removeChild(el.lastChild);
 	}
+}
+
+// 지도에 표시할 선을 생성합니다
+function addPolyline(firstPosition, secondPosition, thirdPosition, idx) {
+  linePath = [firstPosition, secondPosition, thirdPosition];
+
+  let polyline = new kakao.maps.Polyline({
+    path: linePath, // 선을 구성하는 좌표배열 입니다
+    strokeWeight: 5, // 선의 두께 입니다
+    strokeColor: "#FF5757", // 선의 색깔입니다
+    strokeOpacity: 0.7, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
+    strokeStyle: "solid", // 선의 스타일입니다
+  });
+  polyline.setMap(map);
+  polylines.push(polyline);
+
+  return polyline;
+}
+
+function removePolyline() {
+  for (let i = 0; i < polylines.length; i++) {
+    polylines[i].setMap(null);
+  }
+  markers = [];
 }
