@@ -47,7 +47,7 @@
 }
 
 .find-course__container .find-course__map {
-  flex: 2;
+  flex: 3;
 }
 
 .find-course__container .find-course__map #map {
@@ -61,8 +61,30 @@
 .find-course-list__container {
   /* width: 25em; */
   flex: 1;
-  padding-left: 1em;
+  padding-right: 1em;
   text-align: center;
+}
+
+.choice-container {
+	flex: 1;
+	padding-right: 1em;
+}
+
+.choice-list-container {
+	display: flex;
+	flex-direction: column;
+	border-top: 2px solid #eee;
+	border-bottom: 2px solid #eee;
+	height: 100%;
+}
+
+.choice-list-container > div {
+	flex: 1;
+	border-bottom: 2px solid #eee;
+}
+
+.choice-list-container > div:last-child {
+	border-bottom: none;
 }
 
 .find-course__search {
@@ -235,13 +257,11 @@
 }
 
 #placesList > li {
-  height: 9em;
   border: 2px solid #eee;
   border-radius: 8px;
   padding: 0.25em;
   align-items: center;
   margin-bottom: 1em;
-  cursor: pointer;
 }
 
 #placesList > li:hover {
@@ -351,6 +371,16 @@
 .address_name span {
   width: 100%;
   font-size: 0.65em;
+}
+
+#addDateListButton {
+	width: 100%;
+	border: 2px solid #eee;
+	padding: 0.15em 0.25em;
+	border-radius: 5px;
+	background: #FF5757;
+	color: white;
+	cursor: pointer;
 }
 
 /* main content */
