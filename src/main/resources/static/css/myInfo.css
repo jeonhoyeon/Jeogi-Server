@@ -6,6 +6,10 @@
   box-sizing: border-box;
 }
 
+body {
+  overflow: hidden;
+}
+
 /* header start */
 .my-info__header {
   padding: 5px 150px;
@@ -41,6 +45,51 @@
 /* header end */
 
 /* content start */
+#pass_container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: darkgray;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: none;
+}
+
+#pass_popup {
+  background: white;
+  border: 2px solid #eee;
+  border-radius: 8px;
+  flex-direction: column;
+  width: 30em;
+  margin: 10em auto;
+  height: 15em;
+}
+
+#pass_popup > div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 15em;
+  margin: 3em auto;
+  text-align: center;
+}
+
+#pass_popup > div input {
+  margin-top: 1em;
+  width: 100%;
+  border: 2px solid #eee;
+  border-radius: 5px;
+  outline: none;
+  padding: 0.5em 0.5em;
+}
+
+#pass_popup > div button {
+  margin-top: 0.5em;
+  border: 2px solid #eee;
+  border-radius: 5px;
+  padding: 0.5em 0.5em;
+  cursor: pointer;
+}
+
 .my-info__container {
   width: 25em;
   max-width: 95%;

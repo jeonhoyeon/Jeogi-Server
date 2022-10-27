@@ -15,8 +15,8 @@ myPageLocation.addEventListener("click", () => {
 			let parser = new DOMParser();
 			let doc = parser.parseFromString(html, 'text/html');
 
-			console.log(doc);			
-			// document.body.innerHTML = html;
+			console.log(doc);
+			window.document.innterHTML = doc;
 
 		})
 		.catch((err) => {
