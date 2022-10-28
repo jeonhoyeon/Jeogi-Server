@@ -17,6 +17,14 @@
   align-items: center;
 }
 
+#myFavoriteCourseLink {
+	display:none;
+}
+
+#myInfoLink {
+	display: none;
+}
+
 /* 그냥 한 번 테스트 해봐떠 */
 /* .main-header div {
   filter: drop-shadow(2px 4px 2px #eee);
