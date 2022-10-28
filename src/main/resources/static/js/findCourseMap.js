@@ -1,3 +1,5 @@
+const findCourseListArea = document.getElementById("placesList");
+const startArea = document.getElementById("startChoice");
 const secondArea = document.getElementById("resChoice");
 const thirdArea = document.getElementById("cafeChoice");
 const addDateListButton = document.getElementsByClassName("addDateListButton");
@@ -8,15 +10,27 @@ let startPosition, secondPosition, thirdPosition;
 //마커를 담을 배열
 var markers = [];
 let polylines = [];
-
 let customoverlays = [];
 
+let readyStr = "나만의 코스 만들기";
+addInfoItems(findCourseListArea, readyStr);
+
 choiceComplete.addEventListener("click", () => {
+	// 마커, 커스텀오버레이, 리스트 아이템 제거
 	removeMarker();
+	removePolyline();
+	removeCustomOverlayee();
+	removeAllChildNods(findCourseListArea);
+	// 마커, 커스텀오버레이, 리스트 아이템 제거
+
+	// 마커, 폴리라인 추가
 	addMarker(startPosition, null);
 	addMarker(secondPosition, null);
 	addMarker(thirdPosition, null);
 	addPolyline(startPosition, secondPosition, thirdPosition);
+	let completeStr = "코스완성!"
+	addInfoItems(findCourseListArea, completeStr);
+	// 마커, 폴리라인 추가
 })
 
 var mapContainer = document.getElementById("map"), // 지도를 표시할 div
@@ -36,6 +50,8 @@ function locationLoadSuccess(pos) {
 		pos.coords.longitude
 	);
 
+	startPosition = new kakao.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
+
 	// 지도 이동(기존 위치와 가깝다면 부드럽게 이동)
 	map.panTo(currentPos);
 
@@ -53,7 +69,10 @@ function locationLoadSuccess(pos) {
 	// marker.setMap(map);
 
 	// ================================== 현재위치를 기준으로 검색을 해서 선택할 수 있게 보여줘야함 ==================================
-	addItems(pos, startChoice);
+	removeAllChildNods(startArea);
+	locationItems(startArea);
+	let choiceRes = "식당을 선택하세요!";
+	addInfoItems(findCourseListArea, choiceRes);
 	// ================================== 현재위치를 기준으로 검색을 해서 선택할 수 있게 보여줘야함 ==================================
 
 	// 내위치 기준으로 선택했을 경우의 레스토랑, 카페 검색 이벤트 시작
@@ -159,6 +178,7 @@ function placesSearchCB(data, status, pagination) {
 	for (let i = 0; i < addDateListButton.length; i++) {
 		addDateListButton[i].addEventListener("click", () => {
 			// 첫 번째 아이템 클릭했을 때
+			removeAllChildNods(findCourseListArea);
 			console.log(data[i].place_name);
 			console.log(data[i].road_address_name);
 			console.log(data[i].address_name);
@@ -166,8 +186,8 @@ function placesSearchCB(data, status, pagination) {
 			startPosition = new kakao.maps.LatLng(data[i].y, data[i].x);
 
 			// 시작 영역에 띄울 거임
-			const startChoice = document.getElementById("startChoice");
-			addItems(data[i], startChoice);
+			removeAllChildNods(startArea);
+			addItems(data[i], startArea);
 			// 시작 영역에 띄울 거임
 
 			// 마커
@@ -179,6 +199,8 @@ function placesSearchCB(data, status, pagination) {
 
 			// 검색 결과 목록에 추가된 항목들을 제거합니다
 			removeAllChildNods(listEl);
+			let choiceRes = "식당을 선택하세요!";
+			addInfoItems(listEl, choiceRes);
 			// 지도에 표시되고 있는 마커를 제거합니다
 			removeMarker();
 
@@ -243,11 +265,15 @@ function secondPlacesSearchCB(data, status, pagination) {
 	for (let i = 0; i < addDateListButton.length; i++) {
 		addDateListButton[i].addEventListener("click", () => {
 			// 첫 번째 아이템 클릭했을 때
+			removeAllChildNods(findCourseListArea)
+			removeAllChildNods(secondArea);
+			let choiceCafe = "카페를 선택하세요!";
+			addInfoItems(findCourseListArea, choiceCafe);
 			console.log(data[i].place_name);
 			console.log(data[i].road_address_name);
 			console.log(data[i].address_name);
 			console.log(data[i].y + ", " + data[i].x);
-			
+
 			secondPosition = new kakao.maps.LatLng(data[i].y, data[i].x);
 
 			// 시작 영역에 띄울 거임
@@ -269,6 +295,10 @@ function thirdPlacesSearchCB(data, status, pagination) {
 	for (let i = 0; i < addDateListButton.length; i++) {
 		addDateListButton[i].addEventListener("click", () => {
 			// 첫 번째 아이템 클릭했을 때
+			removeAllChildNods(findCourseListArea)
+			removeAllChildNods(thirdArea);
+			let matching = "매칭완료";
+			addInfoItems(findCourseListArea, matching);
 			console.log(data[i].place_name);
 			console.log(data[i].road_address_name);
 			console.log(data[i].address_name);
@@ -283,14 +313,50 @@ function thirdPlacesSearchCB(data, status, pagination) {
 	}
 }
 
+// 인포 아이템 띄우기 시작
+function addInfoItems(choiceArea, str) {
+
+	let infoEl = document.createElement("div"),
+		itemStr =
+			"<div>" +
+			"<span>" +
+			str +
+			"</span>" +
+			"</div>";
+
+	infoEl.innerHTML = itemStr;
+	infoEl.className = "info-item-list";
+
+	choiceArea.appendChild(infoEl);
+
+}
+// 인포 아이템 띄우기 시작
+function locationItems(choiceArea) {
+	let choiceEl = document.createElement("div"),
+		itemStr =
+			"<div>" +
+			"<div class='find-course__description'>" +
+			"<h4 class='first'>" +
+			"현재위치" +
+			"</h4>" +
+			"</div>" +
+			"</div>";
+
+	choiceEl.innerHTML = itemStr;
+	choiceEl.className = "find-course-list";
+
+	choiceArea.appendChild(choiceEl);
+	// 아이템 띄우기 끝
+}
+
 function addItems(dateInfo, choiceArea) {
 	let choiceEl = document.createElement("div"),
 		itemStr =
 			"<div>" +
-			"<div class='ingi-list__description'>" +
-			"<h5 class='first'>" +
+			"<div class='find-course__description'>" +
+			"<h4 class='first'>" +
 			dateInfo.place_name +
-			"</h5>" +
+			"</h4>" +
 			"<div class='first__item'>" +
 			"<span class='first__description'>" +
 			dateInfo.road_address_name +
@@ -306,7 +372,7 @@ function addItems(dateInfo, choiceArea) {
 	itemStr += "</div>" + "</div>" + "</div>";
 
 	choiceEl.innerHTML = itemStr;
-	choiceEl.className = "ingi-list";
+	choiceEl.className = "find-course-list";
 
 	choiceArea.appendChild(choiceEl);
 	// 아이템 띄우기 끝
@@ -464,7 +530,7 @@ function getListItem(index, places) {
 function addMarker(position, idx, title) {
 	var imageSrc = "../images/marker_img.png",
 		imageSize = new kakao.maps.Size(52, 57),
-		imageOption = { offset: new kakao.maps.Point(27, 69) };
+		imageOption = { offset: new kakao.maps.Point(25, 55) };
 
 	var markerImage = new kakao.maps.MarkerImage(
 		imageSrc,
@@ -541,24 +607,31 @@ function removeAllChildNods(el) {
 
 // 지도에 표시할 선을 생성합니다
 function addPolyline(firstPosition, secondPosition, thirdPosition, idx) {
-  linePath = [firstPosition, secondPosition, thirdPosition];
+	linePath = [firstPosition, secondPosition, thirdPosition];
 
-  let polyline = new kakao.maps.Polyline({
-    path: linePath, // 선을 구성하는 좌표배열 입니다
-    strokeWeight: 5, // 선의 두께 입니다
-    strokeColor: "#FF5757", // 선의 색깔입니다
-    strokeOpacity: 0.7, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
-    strokeStyle: "solid", // 선의 스타일입니다
-  });
-  polyline.setMap(map);
-  polylines.push(polyline);
+	let polyline = new kakao.maps.Polyline({
+		path: linePath, // 선을 구성하는 좌표배열 입니다
+		strokeWeight: 5, // 선의 두께 입니다
+		strokeColor: "#FF5757", // 선의 색깔입니다
+		strokeOpacity: 0.7, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
+		strokeStyle: "solid", // 선의 스타일입니다
+	});
+	polyline.setMap(map);
+	polylines.push(polyline);
 
-  return polyline;
+	return polyline;
 }
 
 function removePolyline() {
-  for (let i = 0; i < polylines.length; i++) {
-    polylines[i].setMap(null);
-  }
-  markers = [];
+	for (let i = 0; i < polylines.length; i++) {
+		polylines[i].setMap(null);
+	}
+	markers = [];
+}
+
+// 모든 자식 요소를 제거하는 함수
+function removeAllChildNods(el) {
+	while (el.hasChildNodes()) {
+		el.removeChild(el.lastChild);
+	}
 }

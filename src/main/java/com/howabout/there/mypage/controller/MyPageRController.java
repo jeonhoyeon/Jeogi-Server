@@ -5,9 +5,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +20,7 @@ import com.howabout.there.mypage.dto.UserDto;
 import com.howabout.there.mypage.service.MyPageService;
 import com.howabout.there.sign.dto.SignUpDto;
 import com.howabout.there.sign.vo.UserVo;
+import com.howabout.there.token.JWTUtil;
 
 @RestController
 @RequestMapping("/myPage/myInfo")
@@ -24,6 +28,9 @@ public class MyPageRController {
 	
 	@Autowired
 	MyPageService myPageService;
+	
+	@Autowired
+	JWTUtil util;
 	
 	//유저 정보 업데이트. 회원정보 수정
 	@PostMapping("/updateInfo")
@@ -34,29 +41,56 @@ public class MyPageRController {
 	
 	//회원탈퇴. 비밀번호 확인 -> 비밀번호가 일치하면 1 반환. 서버에서 flag 0으로 업데이트
 	@PostMapping("/withdrawal")
-	public int withdrawl(@RequestBody ArrayList<JSONObject> data) throws ParseException {
-		System.out.println("CHECK112233");
-		int result = myPageService.withdrawal(data);
-		return result;
+	public int withdrawl(HttpServletRequest request,@RequestBody ArrayList<JSONObject> data) throws ParseException {
+		String tokenkey = request.getHeader("Authorization").substring(7);
+		UserDto userUp = myPageService.userListUp(util.getUserIdFromToken(tokenkey));
+		BCryptPasswordEncoder encoder = new  BCryptPasswordEncoder();
+		if(! encoder.matches(userUp.getU_pw(), (String) data.get(0).get("u_pw"))) {
+			return 0;
+		}else {
+			return myPageService.withdrawal(data);
+		}
+		
+
 	}
 	
 	//비밀번호 확인. 비밀번호 일치하면 1, 불일치하면 0 반환.
 	@PostMapping("/CheckPW")
-	public int checkPW(@RequestBody ArrayList<JSONObject> data) throws ParseException {
-		int result = myPageService.pwCheck(data);
-		return result;
+	public int checkPW(HttpServletRequest request, @RequestBody Map data) throws ParseException {
+		String tokenkey = request.getHeader("Authorization").substring(7);
+		UserDto userUp = myPageService.userListUp(util.getUserIdFromToken(tokenkey));
+		BCryptPasswordEncoder encoder = new  BCryptPasswordEncoder();
+		if(! encoder.matches(userUp.getU_pw(), (String) data.get("u_pw"))) {
+			return 0;
+		}else {
+			return 1;
+		}
+
 	}
 	
 	//유저정보 가지고 오기
 	@PostMapping("/getMyData")
-	public UserDto userUp(@RequestBody ArrayList<JSONObject> myData){
-		System.out.println("TEST CHECK ID"+ myData.toString());
-		UserDto userUp = myPageService.userListUp(myData);
-		
+	public UserDto userUp(HttpServletRequest request){
+		String header = request.getHeader("Authorization");
+		String tokenkey = header.substring(7);
+		//토큰으로 user의 ID를 가져온다
+		String userId = util.getUserIdFromToken(tokenkey);
+		// userID로 유저의 정보를 가지고 온다
+		UserDto userUp = myPageService.userListUp(userId);
 		return userUp;
 	}
 	
-	
-
+	//TEST용 
+	@PostMapping("/testlogin/token")
+	public String testTOKEN (HttpServletRequest request) {
+		System.out.println("444444433332211");
+		String header = request.getHeader("Authorization");
+		JWTUtil util = new JWTUtil();
+		String ss = util.getUserIdFromToken(header);
+		String zz = util.getUserNickFromToken(header);
+		String qq = util.getUserBirthFromToken(header);
+		System.out.println(ss + " " + zz + " "+ qq);
+		return ss;
+	}
 	
 }

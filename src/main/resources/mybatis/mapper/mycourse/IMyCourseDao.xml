@@ -6,18 +6,86 @@
 
     <mapper namespace="com.howabout.there.mycourse.dao.IMyCourseDao">
     
-    <select id="getMyCourse" resultType="com.howabout.there.mycourse.dto.MyCourseDto" >
-    SELECT writer, 
-		r_name, r_phone, r_do, r_si, r_gu, r_dong, r_cat, r_url, r_id, r_lon, r_lat, 
-		c_name, c_phone, c_do, c_si, c_gu, c_dong, c_cat, c_url,c_id, c_lon, c_lat 
-	FROM course 
-		JOIN cafe ON (cafe_id = c_id) 
-		JOIN restaurant ON (rest_id = r_id) 
-	WHERE writer = #{u_id};
-    
-    </select>
+    <!-- 내코스 가지고 오기-->
+    	<select id="getMyCourse" resultType="com.howabout.there.mycourse.dto.MyCourseDto" >
+    	SELECT writer, 
+			r_name, r_phone, r_do, r_si, r_gu, r_dong, r_cat, r_url, r_id, r_lon, r_lat, 
+			c_name, c_phone, c_do, c_si, c_gu, c_dong, c_cat, c_url,c_id, c_lon, c_lat 
+		FROM course 
+			JOIN cafe ON (cafe_id = c_id) 
+			JOIN restaurant ON (rest_id = r_id) 
+		WHERE writer = #{u_nick};
+    	</select>
    
+   	<!-- 코스가 존재하는지 확인 -->
+   		<select id="exisCheck" resultType="Integer">
+   		SELECT count(*)
+   		FROM course
+   		WHERE writer = #{u_nick} AND rest_id = #{r_id} AND c_id = #{c_id};
+   		</select>
     	
+    	
+    <!-- 코스 찜하기 -->
+		<update id="courseDibs">
+		UPDATE course INNER JOIN user ON (course.writer = user.u_nick)
+      	SET course.flag = #{flag}
+      	WHERE  course.rest_id = #{r_id}  
+			AND course.cafe_id= #{c_id} 
+			AND user.u_id = #{u_id} 
+			
+		</update>
+    
+    <!-- userCourse Flag 값 가져오기 -->
+    	<select id="checkFlag" resultType="Integer">
+    	SELECT flag 
+    	FROM course
+    	WHERE writer = #{u_nick} AND rest_id = #{r_id} AND cafe_id = #{c_id};
+    	</select>
+    	
+    	
+    <!-- restaurant TABLE 저장-->	
+		<insert id="restSave"> 
+		INSERT INTO restaurant
+		VALUES(#{r_name},#{r_phone},#{r_lon},#{r_lat},#{r_do},#{r_si},#{r_gu},#{r_dong},#{r_cat},#{r_id},#{r_url},#{r_insert_time},#{r_update_time},#{r_image_url});
+		</insert>
+	
+	<!-- restaurant TABLE 저장여부 확인-->
+   		<select id="restCheck" resultType="Integer">
+   		SELECT count(*)
+		FROM restaurant
+		WHERE r_id = #{r_id} AND r_name = #{r_name};
+   		</select>
+	
+    <!-- cafe TABLE 저장-->
+    	<insert id="cafeSave"> 
+		INSERT INTO cafe
+		VALUES(#{c_name},#{c_phone},#{c_lon},#{c_lat},#{c_do},#{c_si},#{c_gu},#{c_dong},#{c_cat},#{c_id},#{c_url},#{c_insert_time},#{c_update_time},#{c_image_url});
+		</insert>
+	
+   <!-- cafe TABLE 저장여부 확인-->
+   		<select id="cafeCheck" resultType="Integer">
+   		SELECT count(*)
+		FROM cafe
+		WHERE c_id = #{c_id} AND c_name = #{c_name};
+   		</select>
+    	
+    <!-- course TABLE 저장-->
+   		<insert id="courseSave"> 
+      	INSERT INTO course(writer,rest_name,rest_id,cafe_name,cafe_id,c_insert_time,c_update_time, gender, birth, flag)
+      	VALUES(#{writer},#{rest_name},#{rest_id},#{cafe_name},#{cafe_id},#{c_insert_time},#{c_update_time}, #{gender}, #{birth}, #{flag}); 
+   		</insert>
+    	
+    <!-- 코스 한개 가지고 오기-->
+    	<select id="findOneCourse" resultType="com.howabout.there.mycourse.dto.InputCourseDto">
+    	SELECT  
+			r_name, r_phone, r_do, r_si, r_gu, r_dong, r_cat, r_url, r_id, r_lon, r_lat, 
+			c_name, c_phone, c_do, c_si, c_gu, c_dong, c_cat, c_url,c_id, c_lon, c_lat 
+		FROM course 
+			JOIN cafe ON (cafe_id = c_id) 
+			JOIN restaurant ON (rest_id = r_id) 
+		WHERE rest_id = #{r_id} AND cafe_id = #{c_id}
+		LIMIT 1;
+    	</select>
     	
     </mapper>
     

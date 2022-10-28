@@ -23,7 +23,7 @@ public class JsoupReview {
          
          Map returnList = new HashMap<>();
          String id = "webdriver.chrome.driver";
-         String path = "E:\\work\\10_26서버\\chromedriver_win32\\chromedriver.exe";
+         String path = "C:\\googledriver\\chromedriver_win32\\chromedriver.exe";
          
             //크롬 드라이버 사용하기 위해 로딩
          System.setProperty(id, path);

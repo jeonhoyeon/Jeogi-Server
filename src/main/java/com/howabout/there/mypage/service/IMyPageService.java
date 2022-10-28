@@ -20,5 +20,5 @@ public interface IMyPageService {
 	public int withdrawal(ArrayList<JSONObject> json) throws ParseException;
 	
 	//내정보 가지고 오기
-	public UserDto userListUp(ArrayList<JSONObject> arrayjson);
+	public UserDto userListUp(String userId);
 }

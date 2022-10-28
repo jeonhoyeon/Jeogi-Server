@@ -14,6 +14,9 @@ public class SignUpDto {
 		private String birth;
 		private int gender;
 		private int u_flag;
+		private String u_email;
+		
+		
 		public String getU_nick() {
 			return u_nick;
 		}
@@ -74,11 +77,12 @@ public class SignUpDto {
 		public void setU_flag(int u_flag) {
 			this.u_flag = u_flag;
 		}
-		@Override
-		public String toString() {
-			return "SignUpDto [u_nick=" + u_nick + ", u_id=" + u_id + ", u_pw=" + u_pw + ", u_insert_id=" + u_insert_id
-					+ ", u_insert_time=" + u_insert_time + ", u_update_id=" + u_update_id + ", u_update_time="
-					+ u_update_time + ", birth=" + birth + ", gender=" + gender + ", u_flag=" + u_flag + "]";
+		public String getU_email() {
+			return u_email;
 		}
+		public void setU_email(String u_email) {
+			this.u_email = u_email;
+		}
+		
 		
 	}

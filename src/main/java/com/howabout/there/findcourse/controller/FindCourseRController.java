@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,10 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.howabout.there.findcourse.JsoupReview;
 import com.howabout.there.findcourse.service.FindCourseService;
-
-
-
-
 
 @RestController
 public class FindCourseRController {
@@ -42,24 +40,7 @@ public class FindCourseRController {
       ArrayList<JSONObject> result = courseService.listUp(inputData, category);
       return result;
       }
-   
-   //완성된 코스를 restaurant, cafe, course TABLE에 저장
-   @PostMapping("/findCourse/saveCourse")
-   public Map saveCourse(@RequestBody ArrayList<JSONObject> coursedata) throws Exception {
-      System.out.println("SAVE COURSE :  "+coursedata.toString());
-   
-      Map answer = courseService.saveCourse(coursedata);
-      return answer;
-   }
-   
-   // 내코스 찜하기 
-   @PostMapping("/findCourse/courseDibs")
-   public int courseDibs(@RequestBody Map dibsData) {
-	   System.out.println("DIBSs.. : "+ dibsData.toString());
-      int SuccessDibs = courseService.courseDibs(dibsData);
-      return SuccessDibs;
-   }
-   
+    
 
    //장소정보 이미지 경로 + 사용자 리뷰를 불러와 줌
    @PostMapping("/findCourse/getLocationInfo")

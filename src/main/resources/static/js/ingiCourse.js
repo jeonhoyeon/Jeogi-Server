@@ -259,6 +259,7 @@ function addItems(dateInfo) {
   }
 }
 
+// 모든 자식요소를 제거하는 함수
 function removeAllChildNods(el) {
   while (el.hasChildNodes()) {
     el.removeChild(el.lastChild);

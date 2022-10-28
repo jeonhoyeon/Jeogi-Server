@@ -29,7 +29,7 @@ loginBtn.addEventListener("click", (e) => {
     alert("로그인되었습니다.");
     console.log("로그인 성공");
 
-    fetch("192.168.0.107/login/signIn", {
+    fetch("/login/signIn", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(req),
@@ -39,12 +39,13 @@ loginBtn.addEventListener("click", (e) => {
         //fetch 이후 작동할 코드
         console.log("response: " + data + "TYPE: " + typeof data);
         console.log(data);
-        if (data.msg == "SUCCESS") {
+        if (data.success == 1) {
           // form.submit();
-          alert("'${response.u_id}'님 환영합니다");
-          // location.href = "./main.html";
+          alert(data.msg+"님 환영합니다");
+          sessionStorage.setItem('jwt', data.token);
+          location.href = "/mainPage";
         } else {
-          alert("아이디와 비밀번호를 확인해주세요.");
+          alert(data.msg);
         }
       });
   }

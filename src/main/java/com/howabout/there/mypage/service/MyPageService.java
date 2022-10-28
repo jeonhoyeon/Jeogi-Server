@@ -27,18 +27,11 @@ public class MyPageService implements IMyPageService{
 	
 	//회원 탈퇴
 	public int withdrawal(ArrayList<JSONObject> json) throws ParseException {
-		JSONObject jsonObjec = (JSONObject) json.get(0);
-		String id = jsonObjec.get("u_id").toString();
-		String input_pw = jsonObjec.get("u_pw").toString();
-		String withdrawalReason = jsonObjec.get("reason").toString();
-		int result = dao.pwCheck(id, input_pw);
-		
-		//pw가 일치하면
-		if(result == 1) {
-			dao.withdrawal(id);
-			dao.reason(withdrawalReason);
-		}
-		return result;
+		String id = json.get(0).get("u_id").toString();
+		String withdrawalReason = json.get(0).get("reason").toString();	
+		dao.withdrawal(id);
+		dao.reason(withdrawalReason);
+		return 1;
 	}
 	
 	//비밀번호 확인
@@ -51,9 +44,8 @@ public class MyPageService implements IMyPageService{
 	}
 	
 	//회원정보 가지고 오기
-	public UserDto userListUp(ArrayList<JSONObject> arrayjson) {
-		String id = arrayjson.get(0).get("u_id").toString();
-		UserDto myInfo = dao.selectUser(id);
+	public UserDto userListUp(String userId) {
+		UserDto myInfo = dao.selectUser(userId);
 		return myInfo;
 	}
 	

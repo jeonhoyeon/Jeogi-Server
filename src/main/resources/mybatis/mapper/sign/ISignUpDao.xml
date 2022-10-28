@@ -7,7 +7,7 @@
 <mapper namespace="com.howabout.there.sign.dao.ISignUpDao">
 
 	<insert id="signUp"> INSERT INTO user
-		VALUES(#{u_nick},#{u_id},#{u_pw},#{u_insert_id},#{u_insert_time},#{u_update_id},#{u_update_time},#{birth},#{gender},#{u_flag}); </insert>
+		VALUES(#{u_nick},#{u_id},#{u_pw},#{u_insert_id},#{u_insert_time},#{u_update_id},#{u_update_time},#{birth},#{gender},#{u_flag},#{u_email}); </insert>
 	<!-- ID 중복체크 쿼리문 -->
 	<select id="idCheck" resultType="boolean"> SELECT IF(COUNT(*) = 1, 1, 0)
 		FROM user WHERE u_id = #{u_id}; </select>

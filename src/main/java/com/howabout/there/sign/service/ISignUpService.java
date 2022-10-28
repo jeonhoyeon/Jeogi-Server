@@ -1,9 +1,10 @@
 package com.howabout.there.sign.service;
 
+import java.util.Map;
+
 import org.json.simple.parser.ParseException;
 
 import com.howabout.there.sign.dto.SignUpDto;
-import com.howabout.there.sign.vo.UserVo;
 
 public interface ISignUpService {
 	
@@ -11,8 +12,8 @@ public interface ISignUpService {
 	public int signUp(SignUpDto signData) throws ParseException;
 	
 	//ID중복 체크 인터페이스
-	public int idCheck(String signData) throws ParseException;
+	public int idCheck(Map signData) throws ParseException;
 
 	//NICK중복 체크 인터페이스
-	public int nickCheck(String signData) throws ParseException;
+	public int nickCheck(Map signData) throws ParseException;
 }

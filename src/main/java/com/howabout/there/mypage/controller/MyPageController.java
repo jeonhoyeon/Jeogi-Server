@@ -15,44 +15,40 @@ import com.howabout.there.mypage.service.MyPageService;
 
 @Controller
 public class MyPageController {
-
+	
 	@Autowired
 	MyPageService myPageService;
-
+	
+	//이건 무슨 홈페이지 ?/
 	@GetMapping("/myCourse/myCourse/myCourse")
 	public String testtest() {
 		return "login";
 	}
-
-	// 이게 진짜 myInfo 요청 web용
-	@GetMapping("/myPage/myInfo/webData")
-	public String webMyInfo( String myData, Model model) {
-		System.out.println("MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM");
-		ArrayList<JSONObject> aa = new ArrayList<>();
-		JSONObject bb = new JSONObject();
-		bb.put("u_id", myData);
-		aa.add(bb);
-		UserDto userUp = myPageService.userListUp(aa);
-		model.addAttribute("myInfo", userUp);
-		return "myInfo";
-	}
-
-	// 이게 진짜 myInfoSetting 요청 web용
-	@GetMapping("/myPage/myInfo/webDatasetting")
-	public String webMyInfoSetting(String myData, Model model) {
-		ArrayList<JSONObject> aa = new ArrayList<>();
-		JSONObject bb = new JSONObject();
-		bb.put("u_id", myData);
-		aa.add(bb);
-		UserDto userUp = myPageService.userListUp(aa);
-		model.addAttribute("myInfo", userUp);
-		return "myInfoSetting";
-	}
-
+	
+	
+	
+	
 	// 회원탈퇴 홈페이지
-	@GetMapping("/myCourse/myCourse/webwithdrawal")
+	@GetMapping("/myPage/withdrawal/webwithdrawal")
 	public String webWithDrawalSite() {
 		return "withdrawal";
 	}
-
+	
+	// 마이페이지 홈페이지
+	@GetMapping("/myPage/myInfo/webData")
+	public String tokenWebMyInfo() {
+		return "myInfo";
+	}
+	// 정보변경 홈페이지 
+	@GetMapping("/myPage/myInfo/webDatasetting")
+	public String tokenWebMyInfoSetting() {
+		return "myInfoSetting";
+	}
+	
+	
+	
+	
+	
+		
+	
 }

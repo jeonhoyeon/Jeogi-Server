@@ -1,6 +1,8 @@
 const myPageLocation = document.getElementById("myPageLocation");
 const myCourseContainerLocation = document.getElementById("myPageContainerLocation");
 
+sessionStorage.getItem('jwt');
+
 myPageLocation.addEventListener("click", () => {
 
 	const req = "leehj";

@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +16,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.howabout.there.sign.dto.LoginDto;
 import com.howabout.there.sign.service.SignInService;
-import com.howabout.there.sign.vo.UserVo;
 import com.howabout.there.test.mailTest;
+import com.howabout.there.token.JWTUtil;
+
+import io.jsonwebtoken.Claims;
 
 
 @RestController
@@ -27,23 +31,20 @@ public class SignInRController {
 	
 	//로그인 기능 컨트롤러
 	@PostMapping("/login/signIn")
-	public LoginDto loginCheck(@RequestBody String data) throws ParseException {
+	public LoginDto loginCheck(@RequestBody Map data) throws ParseException {
+		System.out.println("@@##$$%%^^&&**(())!!@@##$$%%^^&&**((((");
+		System.out.println("H_0.0.3"+data.get("u_id"));
 		LoginDto userDto = new LoginDto();
-		UserVo userVo = signIn.loginCheck(data);
-		userDto.setUserVo(userVo);
-		if(userVo.getU_flag()==3){
-			userDto.setSuccess(0);
-			userDto.setMsg(signIn.loginMsg(data));
-		}else {
-			userDto.setSuccess(1);
-			userDto.setMsg("SUCCESS");
-		}
+		userDto = signIn.loginCheck(data);
+		
 		return userDto;
 	}
 	
+	
 	//아이디 찾기
 	@PostMapping("/login/findMyId")
-	public Map<String,String> findMyId(@RequestBody ArrayList<JSONObject> idHint) {
+	public Map<String,String> findMyId(@RequestBody Map idHint) {
+		System.out.println("abcd  "+idHint.toString());
 		String myId = signIn.findMyId(idHint);
 		Map returnId = new HashMap<>();
 		returnId.put("u_id", myId);
@@ -52,8 +53,8 @@ public class SignInRController {
 	
 	//비밀번호 재설정 내정보 확인
 	@PostMapping("/login/checkMyInfo")
-	public int beforeCheckMyInfo(@RequestBody ArrayList<JSONObject> pwHint) {
-		int myinfoCheck = signIn.infoCheck(pwHint);
+	public int beforeCheckMyInfo(@RequestBody Map pwmyInfo) {
+		int myinfoCheck = signIn.infoCheck(pwmyInfo);
 		return myinfoCheck;
 	}
 	//비밀번호 재설정
@@ -83,5 +84,15 @@ public class SignInRController {
 		return return1;	
 	}
 	
-	
+	@PostMapping("/login/token")
+	public String testTOKEN (HttpServletRequest request) {
+		System.out.println("444444433332211");
+		String header = request.getHeader("Authorization");
+		JWTUtil util = new JWTUtil();
+		String ss = util.getUserIdFromToken(header);
+		String zz = util.getUserNickFromToken(header);
+		String qq = util.getUserBirthFromToken(header);
+		System.out.println(ss + " " + zz + " "+ qq);
+		return ss;
+	}
 }

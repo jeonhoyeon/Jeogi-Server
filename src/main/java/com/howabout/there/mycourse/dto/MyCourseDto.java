@@ -14,6 +14,7 @@ public class MyCourseDto {
 	private String r_cat        ;
 	private String r_id         ;
 	private String r_url        ;
+	private String r_image_url;
 	private String c_name       ;
 	private String c_phone      ;
 	private String c_lon        ;
@@ -25,6 +26,7 @@ public class MyCourseDto {
 	private String c_cat        ;
 	private String c_id         ;
 	private String c_url        ;
+	private String c_image_url;
 	public String getR_name() {
 		return r_name;
 	}
@@ -90,6 +92,12 @@ public class MyCourseDto {
 	}
 	public void setR_url(String r_url) {
 		this.r_url = r_url;
+	}
+	public String getR_image_url() {
+		return r_image_url;
+	}
+	public void setR_image_url(String r_image_url) {
+		this.r_image_url = r_image_url;
 	}
 	public String getC_name() {
 		return c_name;
@@ -157,16 +165,13 @@ public class MyCourseDto {
 	public void setC_url(String c_url) {
 		this.c_url = c_url;
 	}
-
-	@Override
-	public String toString() {
-		return "testDto [r_name=" + r_name + ", r_phone=" + r_phone + ", r_lon=" + r_lon + ", r_lat=" + r_lat
-				+ ", r_do=" + r_do + ", r_si=" + r_si + ", r_gu=" + r_gu + ", r_dong=" + r_dong + ", r_cat=" + r_cat
-				+ ", r_id=" + r_id + ", r_url=" + r_url + ", c_name=" + c_name + ", c_phone=" + c_phone + ", c_lon="
-				+ c_lon + ", c_lat=" + c_lat + ", c_do=" + c_do + ", c_si=" + c_si + ", c_gu=" + c_gu + ", c_dong="
-				+ c_dong + ", c_cat=" + c_cat + ", c_id=" + c_id + ", c_url=" + c_url
-				 + "]";
+	public String getC_image_url() {
+		return c_image_url;
 	}
+	public void setC_image_url(String c_image_url) {
+		this.c_image_url = c_image_url;
+	}
+	
 	
 
 }

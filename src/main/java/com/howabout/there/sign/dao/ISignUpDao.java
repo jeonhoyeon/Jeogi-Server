@@ -9,7 +9,7 @@ import com.howabout.there.sign.vo.UserVo;
 public interface ISignUpDao {
 	
 	//회원가입 user DB 등록 DAO
-	public int signUp(SignUpDto userVo);
+	public int signUp(SignUpDto signdto);
 	//로그인 
 	public int signIn(UserVo userDto);
 	//회원가입 ID중복체크 DAO

@@ -92,6 +92,17 @@
 
 .choice-list-container > div:last-child button {
 	width: 100%;
+	border: 2px solid #eee;
+	padding: 0.5em 0.25em;
+	border-radius: 5px;
+	color: black;
+	cursor: pointer;
+	font-weight: bold;
+}
+
+.choice-list-container > div:last-child button:hover {
+	background: #FF5757;
+	color: white;
 }
 
 .find-course__search {
@@ -263,6 +274,10 @@
   width: 0px;
 }
 
+.right-box3 div {
+	height: 100%;
+}
+
 #placesList > li {
   border: 2px solid #eee;
   border-radius: 8px;
@@ -299,6 +314,25 @@
   font-weight: bold;
 }
 
+#startChoice {
+	padding: 0.5em 0;
+}
+
+#resChoice {
+	padding: 0.5em 0;
+}
+
+#cafeChoice {
+	padding: 0.5em 0;
+}
+
+.find-course-list {
+	height: 100%;
+	border: 2px solid #eee;
+	border-radius: 5px;
+	text-align: center;
+}
+
 .find-course-list:hover {
   background: #eee;
 }
@@ -328,6 +362,27 @@
   margin: auto;
   width: 3.25em;
   height: 1.25em;
+}
+
+#placesList {
+	height: 100%;
+}
+
+.info-item-list {
+	border: 2px solid #eee;
+	background: #FF5757;
+	border-radius: 8px;
+}
+
+.info-item-list div {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.info-item-list div span {
+	color: white;
+	font-weight: bold;
 }
 
 .custom_content {
@@ -380,14 +435,19 @@
   font-size: 0.65em;
 }
 
-#addDateListButton {
+.addDateListButton {
 	width: 100%;
 	border: 2px solid #eee;
-	padding: 0.15em 0.25em;
+	padding: 0.5em 0.25em;
 	border-radius: 5px;
+	color: black;
+	font-weight: bold;
+	cursor: pointer;
+}
+
+.addDateListButton:hover {
 	background: #FF5757;
 	color: white;
-	cursor: pointer;
 }
 
 /* main content */

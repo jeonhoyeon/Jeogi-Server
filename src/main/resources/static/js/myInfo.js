@@ -5,50 +5,43 @@ const identification = document.getElementById("userImportant");
 const userPw = document.getElementById("userPw");
 
 window.addEventListener("DOMContentLoaded", () => {
-<<<<<<< HEAD
-  const req = "leehj"
-=======
-  const req = {
-    u_id: "세션에 저장되어 있는 u_id",
-  };
-  const arrReq = [];
-  arrReq.push(req);
->>>>>>> 66e64929b30d473eae4e3d1a90c2c0a529f3b7dd
 
-  fetch("/myPage/myInfo/webData", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: req,
-  })
-    .then((response)
-    .then((myPageData) => {
-      // 페이지를 보내주면 어떻게 띄울 수 있는지 확인
-    });
+	fetch("/myPage/myInfo/getMyData", {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/json",
+			"Authorization": "Bearer eyJqd3QiOiJIUzI1NiIsImFsZyI6IkhTMjU2In0.eyJzdWIiOiJ0ZXN0MSIsInVfaWQiOiJ0ZXN0MSIsImdlbmRlciI6MSwidV9uaWNrIjoiVHV0aWMiLCJiaXJ0aCI6IjE5OTgtMDItMjAiLCJleHAiOjE2NjY5NjEzOTcsImlhdCI6MTY2NjkyNTM5N30.uTd8v-k9WeSmj3MnT3MlVGLcpOfuqoJYRr8aal3h8qI"
+		},
+	})
+		.then((response) => response.json())
+		.then((myPageData) => {
+			console.log(myPageData);
+		})
 });
 
 myInfoSettingButton.addEventListener("click", () => {
-  passContainer.style.display = "flex";
+	passContainer.style.display = "flex";
 });
 
 quit.addEventListener("click", () => {
-  passContainer.style.display = "none";
+	passContainer.style.display = "none";
 })
 
 identification.addEventListener("click", () => {
-  const req = {
-    u_pw: userPw.value,
-  }
-  fetch("/myPage/myInfo/CheckPW", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(req),
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      if(data == 0) {
-        alert("다시 확인하세요.");
-      } else {
-        location.href="myInfoSetting";
-      }
-    })
+	const req = {
+		u_pw: userPw.value,
+	}
+	fetch("/myPage/myInfo/CheckPW", {
+		method: "POST",
+		headers: { "Content-Type": "application/json" },
+		body: JSON.stringify(req),
+	})
+		.then((response) => response.json())
+		.then((data) => {
+			if (data == 0) {
+				alert("다시 확인하세요.");
+			} else {
+				location.href = "myInfoSetting";
+			}
+		})
 })
