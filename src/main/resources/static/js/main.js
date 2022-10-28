@@ -1,11 +1,39 @@
 const myPageLocation = document.getElementById("myPageLocation");
 const myCourseContainerLocation = document.getElementById("myPageContainerLocation");
+const myFavoriteCourseLink = document.getElementById("myFavoriteCourseLink");
+const myInfoLink = document.getElementById("myInfoLink");
+const loginLogout = document.getElementById("loginLogout");
 
-sessionStorage.getItem('jwt');
+const token = sessionStorage.getItem('jwt');
+
+window.addEventListener("DOMContentLoaded", () => {
+	if (token != null) {
+		myFavoriteCourseLink.style.display = "inline";
+		myInfoLink.style.display = "inline";
+		loginLogout.innerText = "로그아웃";
+	} else {
+		sessionStorage.clear();
+	}
+})
+
+loginLogout.addEventListener("click", () => {
+	if (token == null) {
+		location.href = "/login/signIn";
+	} else {
+		const logout = confirm("로그아웃 하실?");
+		if (logout) {
+			sessionStorage.clear();
+			location.href = "/mainPage";
+		} else {
+			alert("안할거면 돌아가");
+		}
+	}
+})
+
 
 myPageLocation.addEventListener("click", () => {
 
-	const req = "leehj";
+	const req = "leehj"
 
 	fetch("/myPage/myInfo/webData", {
 		method: "POST",
