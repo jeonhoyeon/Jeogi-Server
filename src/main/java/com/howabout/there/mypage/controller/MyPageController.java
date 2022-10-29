@@ -45,10 +45,5 @@ public class MyPageController {
 		return "myInfoSetting";
 	}
 	
-	
-	
-	
-	
-		
-	
+
 }
