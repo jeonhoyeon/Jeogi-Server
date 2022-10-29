@@ -8,6 +8,7 @@ const userEmail = document.getElementById("userEmail");
 const userNick = document.getElementById("userNick");
 const userGender = document.getElementById("userGender");
 const userBirth = document.getElementById("userBirth");
+const token = sessionStorage.getItem('jwt');
 
 window.addEventListener("DOMContentLoaded", () => {
 
@@ -20,7 +21,6 @@ window.addEventListener("DOMContentLoaded", () => {
 	})
 		.then((response) => response.json())
 		.then((myPageData) => {
-			const token = sessionStorage.getItem('jwt');
 			let idUser = myPageData.u_id;
 			userId.value = idUser;
 			let emailUser = myPageData.u_email;
@@ -45,6 +45,7 @@ quit.addEventListener("click", () => {
 	passContainer.style.display = "none";
 })
 
+//까아아아아아아아ㅏ아앙아아ㅏ아아아아아악 ~~~~~ 
 identification.addEventListener("click", () => {
 	const req = {
 		u_pw: userPw.value,
@@ -58,10 +59,13 @@ identification.addEventListener("click", () => {
 	})
 		.then((response) => response.json())
 		.then((data) => {
-			if (data == 0) {
-				alert("다시 확인하세요.");
-			} else {
+			let pwUser = myPageData.u_pw;
+			userPw.value = pwUser;
+			if (data.success == 1) {
 				location.href = "/myPage/myInfo/updateInfo";
+			} else {
+				alert("다시 확인하세요.");
 			}
 		})
 })
+
