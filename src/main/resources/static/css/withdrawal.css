@@ -4,12 +4,16 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  overflow: hidden;
+  letter-spacing: 1px;
+}
+
+body {
+	overflow: hidden;
 }
 
 /* header start */
 .withdrawal__header {
-  padding: 5px 150px;
+  padding: 5px 60px;
   display: flex;
   justify-content: space-between;
   background: #ff5757;
@@ -31,9 +35,10 @@
   font-weight: bold;
 }
 
-#my-page__choice {
-  color: black;
+.withdrawal__header .my-info-nav__list ul li a:hover {
+  border-bottom: 2px solid #eee;
 }
+
 /* header end */
 
 .withdrawal-container{
