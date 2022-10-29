@@ -39,7 +39,7 @@ public class JWTFilter extends OncePerRequestFilter {
 		if(authorizationHeader!=null && authorizationHeader.startsWith("Bearer")) {
 			//substring = n번째 인덱스를 포함하여 그 뒤 문자를 가져옴
 			token = authorizationHeader.substring(7);
-			System.out.println("TOKEN :?/"+token);
+			System.out.println("TOKEN : 필터안  토큰 : "+token);
 			userName = jwtutil.extractUsername(token);
 			System.out.println("userName CHECK : " + userName);
 		}
@@ -60,6 +60,7 @@ public class JWTFilter extends OncePerRequestFilter {
 				userNamePwAuthToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 				System.out.println("33");
 				SecurityContextHolder.getContext().setAuthentication(userNamePwAuthToken);
+				System.out.println("44");
 			}
 		}
 		filterChain.doFilter(request, response);

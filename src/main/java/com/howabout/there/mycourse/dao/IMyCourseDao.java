@@ -1,5 +1,6 @@
 package com.howabout.there.mycourse.dao;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -27,7 +28,7 @@ public interface IMyCourseDao {
 	
 	// 유저 코스 저장 & 저장한 코스 id 반환
 	public boolean courseSave(InputCourseDto courseDto);
-	public boolean courseDibs(@Param("u_nick")String u_id,@Param("r_id")String r_id,@Param("c_id")String c_id, @Param("flag")int flagValue);
+	public boolean courseDibs(@Param("u_nick")String u_id,@Param("r_id")String r_id,@Param("c_id")String c_id, @Param("flag")int flagValue, @Param("time") Timestamp time  );
 	
 	
 	// 사용자가 선택한 Course 가 존재하는지 확인 

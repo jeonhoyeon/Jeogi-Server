@@ -16,5 +16,7 @@ public interface ISignUpDao {
 	public boolean idCheck(String string);
 	//회원가입 NICK중복체크 DAO
 	public boolean nickCheck(String string);
+	//회원가입 EMAIL중복체크 DAO
+	public int emailCheck(String email);
 		
 }

@@ -32,8 +32,8 @@ public class SignUpService implements ISignUpService{
 //		JSONObject jsonObject = (JSONObject)parser.parse(signData);
 		
 		try {
-			boolean aa = signdao.idCheck(signData.get("u_id").toString());
-			if(aa == true) {
+			boolean id = signdao.idCheck(signData.get("u_id").toString());
+			if(id == true) {
 				return 0;
 			}else {
 				return 1;
@@ -50,8 +50,8 @@ public class SignUpService implements ISignUpService{
 //		JSONObject jsonObject = (JSONObject)parser.parse(signData);
 		
 		try {
-			boolean aa = signdao.nickCheck(signData.get("u_nick").toString());
-			if(aa == true) {
+			boolean nick = signdao.nickCheck(signData.get("u_nick").toString());
+			if(nick == true) {
 				return 0;
 			}else {
 				return 1;
@@ -62,7 +62,12 @@ public class SignUpService implements ISignUpService{
 		}
 	}
 	
-	
+	@Override
+	@Transactional
+	public int emailCheck(Map signData) throws ParseException {       
+			int email = signdao.emailCheck(signData.get("u_email").toString());
+		return email;
+	}
 	
 	@Override
 	@Transactional

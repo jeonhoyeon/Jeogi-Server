@@ -33,10 +33,10 @@ public class SignUpRController {
 		int nickchecked = signService.nickCheck(data);
 		return nickchecked;
 	}
-
+	// 회원가입 이메일 체크
 	@PostMapping("/emailkCheck")
 	public int emailCheck(@RequestBody Map data) throws ParseException {
-		int nickchecked = 1;
+		int nickchecked = signService.emailCheck(data);
 		return nickchecked;
 	}
 	

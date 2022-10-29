@@ -8,12 +8,15 @@ import com.howabout.there.sign.dto.SignUpDto;
 
 public interface ISignUpService {
 	
-	//DB아이디 등록 인터페이스
+	//DB아이디 등록 
 	public int signUp(SignUpDto signData) throws ParseException;
 	
-	//ID중복 체크 인터페이스
+	//ID중복 체크 
 	public int idCheck(Map signData) throws ParseException;
 
-	//NICK중복 체크 인터페이스
+	//NICK중복 체크 
 	public int nickCheck(Map signData) throws ParseException;
+	
+	//EMAIL중복 체크 
+	public int emailCheck(Map signData) throws ParseException;
 }

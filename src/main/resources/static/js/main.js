@@ -20,12 +20,12 @@ loginLogout.addEventListener("click", () => {
 	if (token == null) {
 		location.href = "/login/signIn";
 	} else {
-		const logout = confirm("로그아웃 하실?");
+		const logout = confirm("정말 떠나실 거에요? ㅠㅠ");
 		if (logout) {
 			sessionStorage.clear();
 			location.href = "/mainPage";
 		} else {
-			alert("안할거면 돌아가");
+			alert("히히")
 		}
 	}
 })

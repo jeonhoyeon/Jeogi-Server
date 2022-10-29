@@ -84,15 +84,4 @@ public class SignInRController {
 		return return1;	
 	}
 	
-	@PostMapping("/login/token")
-	public String testTOKEN (HttpServletRequest request) {
-		System.out.println("444444433332211");
-		String header = request.getHeader("Authorization");
-		JWTUtil util = new JWTUtil();
-		String ss = util.getUserIdFromToken(header);
-		String zz = util.getUserNickFromToken(header);
-		String qq = util.getUserBirthFromToken(header);
-		System.out.println(ss + " " + zz + " "+ qq);
-		return ss;
-	}
 }

@@ -54,6 +54,7 @@ public class SignInService implements UserDetailsService  {
 			resultDto.setSuccess(0);
 		}else {
 			returnValue = jwtutil.generateToken(loginCheck, loginCheck.getU_id());
+			System.out.println("login Token : " + returnValue);
 			resultDto.setToken(returnValue);
 			resultDto.setMsg(loginCheck.getU_nick());
 			resultDto.setSuccess(1);

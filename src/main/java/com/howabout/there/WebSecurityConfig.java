@@ -55,6 +55,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter { // 2
 
   @Override
   protected void configure(HttpSecurity http) throws Exception { // 5
+	  
+	  
 	  http.csrf().disable().authorizeRequests().antMatchers(
 			  "/login/**", "/findCourse/**", "/popularCourse/**", "/splash/**", "/mainPage" , "/test/kakao"
 			  ,"/myCourse/myCourseSite","/myPage/withdrawal/webwithdrawal", "/myPage/myInfo/webData", "/myPage/myInfo/webDatasetting"

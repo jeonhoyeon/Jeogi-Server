@@ -13,6 +13,14 @@
 		FROM user WHERE u_id = #{u_id}; </select>
 	<!-- NICK 중복체크 쿼리문 -->
 	<select id="nickCheck" resultType="boolean"> SELECT IF(COUNT(*) = 1, 1, 0)
-		FROM user WHERE u_nick = #{u_nick}; </select>
+		FROM user WHERE u_nick = #{u_nick}; 
+	</select>
+	<!-- EMAIL 중복체크 쿼리문-->
+	<select id="emailCheck" resultType="Integer">
+		SELECT IF(COUNT(*) = 1, 1, 0)
+		FROM user WHERE u_email = #{u_email};
+	
+	</select>
+
 
 </mapper>
