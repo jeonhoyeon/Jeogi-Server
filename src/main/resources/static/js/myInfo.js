@@ -11,15 +11,24 @@ const userBirth = document.getElementById("userBirth");
 const token = sessionStorage.getItem('jwt');
 
 window.addEventListener("DOMContentLoaded", () => {
+	
+	const req = {
+		Id: userId.value,
+		Email: userEmail.value,
+		Nick: userNick.value,
+		Gender: userGender.value,
+		Birth: userBirth.value,
+	}
 
 	fetch("/myPage/myInfo/getMyData", {
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json",
 			"Authorization": "Bearer eyJqd3QiOiJIUzI1NiIsImFsZyI6IkhTMjU2In0.eyJzdWIiOiJ0ZXN0MSIsInVfaWQiOiJ0ZXN0MSIsImdlbmRlciI6MSwidV9uaWNrIjoiVHV0aWMiLCJiaXJ0aCI6IjE5OTgtMDItMjAiLCJleHAiOjE2NjY5NjEzOTcsImlhdCI6MTY2NjkyNTM5N30.uTd8v-k9WeSmj3MnT3MlVGLcpOfuqoJYRr8aal3h8qI"
-		},
+			},
+		body: JSON.stringfy(req),
 	})
-		.then((response) => response.json())
+		//.then((response) => response.json())
 		.then((myPageData) => {
 			let idUser = myPageData.u_id;
 			userId.value = idUser;

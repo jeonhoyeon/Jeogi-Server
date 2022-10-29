@@ -18,9 +18,11 @@ wd_btn.addEventListener("click", (e) => {
     };
     console.log(wd_select.value);
 
-    fetch("/myPage/myInfo/withdrawal", {
+    fetch("/myPage/myInfowithdrawal", {
       method: "POST",
-      headers: { "Content-type": "application.json" },
+      headers: { "Content-type": "application.json",
+      "Authorization": "Bearer eyJqd3QiOiJIUzI1NiIsImFsZyI6IkhTMjU2In0.eyJzdWIiOiJ0ZXN0MSIsInVfaWQiOiJ0ZXN0MSIsImdlbmRlciI6MSwidV9uaWNrIjoiVHV0aWMiLCJiaXJ0aCI6IjE5OTgtMDItMjAiLCJleHAiOjE2NjY5NjEzOTcsImlhdCI6MTY2NjkyNTM5N30.uTd8v-k9WeSmj3MnT3MlVGLcpOfuqoJYRr8aal3h8qI"
+		  },
       body: JSON.stringify(req),
     })
       .then((response) => response.json())
