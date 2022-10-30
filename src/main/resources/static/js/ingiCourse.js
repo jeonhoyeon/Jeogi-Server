@@ -8,6 +8,9 @@ const ingiDo = document.getElementById("ingi-do");
 const ingiSi = document.getElementById("ingi-si");
 const ingiSearch = document.getElementById("ingi-search");
 const items = document.getElementById("items");
+const myFavoriteCourseLink = document.getElementById("myFavoriteCourseLink");
+const myInfoLink = document.getElementById("myInfoLink");
+const loginLogout = document.getElementById("loginLogout");
 
 // 마커를 담을 배열
 let markers = [];
@@ -16,8 +19,19 @@ let polylines = [];
 
 let doDatas;
 
+const token = sessionStorage.getItem('jwt');
+
 // 페이지 접속하자마자 실행할 수 있도록 DOMContentLoaded 이벤트 생성
 window.addEventListener("DOMContentLoaded", () => {
+
+  if (token != null) {
+    myFavoriteCourseLink.style.display = "inline";
+    myInfoLink.style.display = "inline";
+    loginLogout.innerText = "로그아웃";
+  } else {
+    sessionStorage.clear();
+  }
+
   fetch("/popularCourse/getDo", {
     method: "GET",
     headers: { "Content-Type": "application/json" },

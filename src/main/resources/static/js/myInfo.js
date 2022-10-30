@@ -8,11 +8,19 @@ const userEmail = document.getElementById("userEmail");
 const userNick = document.getElementById("userNick");
 const userGender = document.getElementById("userGender");
 const userBirth = document.getElementById("userBirth");
-const token = sessionStorage.getItem('jwt');
+const loginLogout = document.getElementById("loginLogout");
 
+const token = sessionStorage.getItem('jwt');
 const tokenHead = "Bearer " + token;
 
 window.addEventListener("DOMContentLoaded", () => {
+
+    if (token != null) {
+        loginLogout.innerText = "로그아웃";
+    } else {
+        sessionStorage.clear();
+    }
+
     fetch("/myPage/myInfo/getMyData", {
         method: "POST",
         headers: {
@@ -56,16 +64,17 @@ identification.addEventListener("click", () => {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
-            "Authorization": tokenHead,	
+            "Authorization": tokenHead,
         },
         body: JSON.stringify(req),
     })
         .then((response) => response.json())
         .then((userData) => {
-	        if (Number(userData) == 1) {
-                location.href = "myPage/myInfo/updateInfo";
+            console.log("받은 데이터: " + userData);
+            if (Number(userData) == 1) {
+                alert("비밀번호 맞음");
             } else {
-                alert("다시 확인하세요.");
+                alert("비밀번호 틀림");
             }
         })
 

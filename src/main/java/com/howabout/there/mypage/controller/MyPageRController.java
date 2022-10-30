@@ -59,10 +59,15 @@ public class MyPageRController {
 	public int checkPW(HttpServletRequest request, @RequestBody Map data) throws ParseException {
 		String tokenkey = request.getHeader("Authorization").substring(7);
 		UserDto userUp = myPageService.userListUp(util.getUserIdFromToken(tokenkey));
+		System.out.println("유저정보 잘 가지오 왔는가 ?? : "+ userUp.getU_id());
 		BCryptPasswordEncoder encoder = new  BCryptPasswordEncoder();
-		if(! encoder.matches(userUp.getU_pw(), (String) data.get("u_pw"))) {
+		System.out.println("111"+userUp.getU_pw());
+		System.out.println("222"+data.get("u_pw").toString());
+		if(! encoder.matches( (String) data.get("u_pw") ,userUp.getU_pw())) {
+			System.out.println("비번 틀렸으");
 			return 0;
 		}else {
+			System.out.println("비번 맞았으!");
 			return 1;
 		}
 
