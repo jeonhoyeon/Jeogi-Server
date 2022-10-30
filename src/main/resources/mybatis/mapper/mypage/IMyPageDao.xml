@@ -15,7 +15,7 @@
     
     <!-- 유저정보 가지고 오기-->
     <select id="selectUser" resultType="com.howabout.there.mypage.dto.UserDto">
-  		SELECT    u_nick, u_id, u_pw, birth, gender
+  		SELECT    u_nick, u_id, birth, gender,u_email
   		FROM    user
   		WHERE    u_id = #{id};	
 	</select>

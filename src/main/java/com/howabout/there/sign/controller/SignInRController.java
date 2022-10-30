@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.howabout.there.sign.dto.LoginDto;
 import com.howabout.there.sign.service.SignInService;
+import com.howabout.there.sign.service.mailTestService;
 import com.howabout.there.test.mailTest;
 import com.howabout.there.token.JWTUtil;
 
@@ -28,6 +29,8 @@ public class SignInRController {
 	@Autowired
 	SignInService signIn;
 	
+	@Autowired
+	mailTestService mail;
 	
 	//로그인 기능 컨트롤러
 	@PostMapping("/login/signIn")
@@ -36,7 +39,7 @@ public class SignInRController {
 		System.out.println("H_0.0.3"+data.get("u_id"));
 		LoginDto userDto = new LoginDto();
 		userDto = signIn.loginCheck(data);
-		
+		mail.send();
 		return userDto;
 	}
 	

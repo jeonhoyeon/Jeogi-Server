@@ -77,6 +77,8 @@ public class MyPageRController {
 		String userId = util.getUserIdFromToken(tokenkey);
 		// userID로 유저의 정보를 가지고 온다
 		UserDto userUp = myPageService.userListUp(userId);
+		System.out.println("유저 정보 : " + userUp.toString());
+		System.out.println("user ID : " + userUp.getU_id());
 		return userUp;
 	}
 	

@@ -6,16 +6,7 @@ public class UserDto {
 	private String u_pw;
 	private String birth;
 	private int gender;
-	
-	public UserDto(String u_nick, String u_id, String u_pw, String birth, int gender) {
-		super();
-		this.u_nick = u_nick;
-		this.u_id = u_id;
-		this.u_pw = u_pw;
-		this.birth = birth;
-		this.gender = gender;
-	}
-	
+	private String u_email;
 	public String getU_nick() {
 		return u_nick;
 	}
@@ -46,12 +37,18 @@ public class UserDto {
 	public void setGender(int gender) {
 		this.gender = gender;
 	}
-	
+	public String getU_email() {
+		return u_email;
+	}
+	public void setU_email(String u_email) {
+		this.u_email = u_email;
+	}
 	@Override
 	public String toString() {
 		return "UserDto [u_nick=" + u_nick + ", u_id=" + u_id + ", u_pw=" + u_pw + ", birth=" + birth + ", gender="
-				+ gender + "]";
+				+ gender + ", u_email=" + u_email + "]";
 	}
+	
 	
 	
 	
