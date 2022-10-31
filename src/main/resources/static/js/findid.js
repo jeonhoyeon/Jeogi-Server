@@ -1,6 +1,7 @@
 const findIdEmail = document.getElementById("findId-email")
 const findIdBtn = document.getElementById("findId__button")
-
+const token = sessionStorage.getItem('jwt');
+const tokenHead = "Bearer " + token;
 
 findIdBtn.addEventListener("click", () => {
   

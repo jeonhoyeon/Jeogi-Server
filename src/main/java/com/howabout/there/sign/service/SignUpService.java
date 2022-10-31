@@ -64,7 +64,7 @@ public class SignUpService implements ISignUpService{
 	
 	@Override
 	@Transactional
-	public int emailCheck(Map signData) throws ParseException {       
+	public int emailCheck(Map signData) throws ParseException {
 			int email = signdao.emailCheck(signData.get("u_email").toString());
 		return email;
 	}
@@ -84,7 +84,7 @@ public class SignUpService implements ISignUpService{
 		signData.setU_update_id(signData.getU_id());
 		signData.setU_update_time(Timestamp.valueOf(LocalDateTime.now()));
 		signData.setU_flag(1);
-		signData.setU_email("cys@moble.com");
+		signData.setU_email(signData.getU_email());
 		try {
 			signdao.signUp(signData);
 			return 1;
