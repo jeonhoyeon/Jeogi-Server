@@ -7,12 +7,13 @@ const new_birth_year = document.getElementById("birth-box__year");
 const new_birth_month = document.getElementById("birth-box__month");
 const new_birth_day = document.getElementById("birth-box__day");
 const loginLogout = document.getElementById("loginLogout");
-
+const women = document.getElementById("women");
+const men = document.getElementById("men");
 const token = sessionStorage.getItem('jwt');
 const tokenHead = "Bearer " + token;
 
-let passPass = false;
-let nickPass = false;
+// let passPass = false;
+// let nickPass = false;
 
 window.addEventListener("DOMContentLoaded", () => {
 
@@ -38,23 +39,24 @@ window.addEventListener("DOMContentLoaded", () => {
             user_id.value = idUser;
             let nickUser = infoData.u_nick;
             new_nickname.value = nickUser;
+            //생년월일, 성별 체크 해야함 + 비밀번호 변경안할때 기존 비밀번호로 보내기
             // let birthUser = infoData.birth;
             // userBirth.value = birthUser;
-            // if (infoData.gender == 0) {
-            //     userGender.value = 0
-            // } else {
-            //     userGender.value = 1
-            // }
+            if (infoData.gender == 0) {
+                women.value = 0;
+            } else {
+                men.value = 1;
+            }
         });
 });
 
 // new password checked
 re_new_password.addEventListener("blur", () => {
     if (re_new_password.value != new_password.value) {
-        console.log("불일치");
+        console.log("비밀번호 불일치");
         console.log("비밀번호: " + new_password.value + " 비밀번호 재입력: "+ re_new_password.value);
     } else {
-        console.log("일치");
+        console.log("비밀번호 일치");
         passPass = true;
     }
 });
@@ -74,9 +76,9 @@ new_nickname.addEventListener("blur", () => {
     })
         .then((response) => response.json())
         .then((newnickdata) => {
-            console.log("닉네임 : " + newnickdata);
+            console.log("newnickdata : " + newnickdata);
             if (Number(newnickdata) == 1) {
-                alert("사용할 수 있는 닉네임입니다..");
+                alert("사용할 수 있는 닉네임입니다.");
                 nickPass = true;
             } else if(Number(newnickdata) == 0){
                 alert("중복입니다. 다시 입력해주세요. ");
@@ -114,7 +116,9 @@ save_data.addEventListener("click", () => {
         })
             .then((response) => response.json())
             .then((data) => {
-                console.log("정보수정: " + data.jwt);
+                console.log("data: " + data.jwt);
+                alert("변경되었습니다.");
+                location.href = "/myPage/myInfo/webData";
             });
     // }
 });

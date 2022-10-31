@@ -37,15 +37,12 @@ public class MyPageRController {
 	public Map updateUser(HttpServletRequest request, @RequestBody UserVo uservo){
 		String tokenkey = request.getHeader("Authorization").substring(7);
 		String userNick = util.getUserNickFromToken(tokenkey);
-		System.out.println("userNick : "+userNick);
-		System.out.println("userNick : "+uservo.getU_nick());
+		String userId = util.getUserIdFromToken(tokenkey);
+		uservo.setU_id(userId);
 		Map user = myPageService.userUpdate(uservo, userNick);
-
-		System.out.println("aaaaa: "+user.get("jwt"));
 
 		return user;
 	}
-
 	//회원탈퇴. 비밀번호 확인 -> 비밀번호가 일치하면 1 반환. 서버에서 flag 0으로 업데이트
 	@PostMapping("/withdrawal")
 	public int withdrawl(HttpServletRequest request,@RequestBody ArrayList<JSONObject> data) throws ParseException {
