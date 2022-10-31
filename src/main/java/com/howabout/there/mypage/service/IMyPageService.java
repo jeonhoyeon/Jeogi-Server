@@ -12,7 +12,7 @@ import com.howabout.there.sign.vo.UserVo;
 public interface IMyPageService {
 
 	//회원정보 수정.
-	public Map userUpdate(UserVo uservo, String usserNick);
+	public Map userUpdate(UserVo uservo, String userNick);
 
 	//비밀번호 확인
 	public int pwCheck(ArrayList<JSONObject> json) throws ParseException ;

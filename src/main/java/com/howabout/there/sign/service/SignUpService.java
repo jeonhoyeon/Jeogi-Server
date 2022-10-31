@@ -51,9 +51,12 @@ public class SignUpService implements ISignUpService{
 	@Transactional
 	public int nickCheck(Map signData) throws ParseException {       
 //		JSONObject jsonObject = (JSONObject)parser.parse(signData);
-		
+
+		System.out.println("============================="+signData.get("u_nick"));
+
 		try {
 			boolean nick = signdao.nickCheck(signData.get("u_nick").toString());
+
 			if(nick == true) {
 				return 0;
 			}else {

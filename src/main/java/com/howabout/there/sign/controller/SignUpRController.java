@@ -30,14 +30,15 @@ public class SignUpRController {
 	// 회원가입 닉네임 체크 컨트롤러
 	@PostMapping("/nickCheck")
 	public int nickCheck(@RequestBody Map data) throws ParseException {
+		System.out.println("controller data: "+data.get("u_nick"));
 		int nickchecked = signService.nickCheck(data);
 		return nickchecked;
 	}
 	// 회원가입 이메일 체크
 	@PostMapping("/emailkCheck")
 	public int emailCheck(@RequestBody Map data) throws ParseException {
-		int nickchecked = signService.emailCheck(data);
-		return nickchecked;
+		int emailchecked = signService.emailCheck(data);
+		return emailchecked;
 	}
 	
 	// 회원가입 user DB에 데이터 넣기
