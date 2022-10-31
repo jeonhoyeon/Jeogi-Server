@@ -70,7 +70,7 @@ userEmail.addEventListener("blur", () => {
 
     // console.log(req);
     console.log(JSON.stringify(req));
-    fetch("/login/signUp/EmailCheck", {
+    fetch("/login/signUp/emailCheck", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(req),
