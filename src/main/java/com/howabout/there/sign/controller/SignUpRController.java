@@ -34,10 +34,10 @@ public class SignUpRController {
 		return nickchecked;
 	}
 	// 회원가입 이메일 체크
-	@PostMapping("/emailkCheck")
+	@PostMapping("/emailCheck")
 	public int emailCheck(@RequestBody Map data) throws ParseException {
-		int nickchecked = signService.emailCheck(data);
-		return nickchecked;
+		int emailchecked = signService.emailCheck(data);
+		return emailchecked;
 	}
 	
 	// 회원가입 user DB에 데이터 넣기
