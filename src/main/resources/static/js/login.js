@@ -26,7 +26,6 @@ loginBtn.addEventListener("click", (e) => {
   } else if (loginPw.value == "") {
     alert("비밀번호를 입력해주세요");
   } else {
-    alert("로그인되었습니다.");
     console.log("로그인 성공");
 
     fetch("/login/signIn", {

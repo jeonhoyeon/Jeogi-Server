@@ -37,7 +37,11 @@ public class MyPageRController {
 	public Map updateUser(HttpServletRequest request, @RequestBody UserVo uservo){
 		String tokenkey = request.getHeader("Authorization").substring(7);
 		String userNick = util.getUserNickFromToken(tokenkey);
+		System.out.println("userNick : "+userNick);
+		System.out.println("userNick : "+uservo.getU_nick());
 		Map user = myPageService.userUpdate(uservo, userNick);
+
+		System.out.println("aaaaa: "+user.get("jwt"));
 
 		return user;
 	}
