@@ -670,6 +670,7 @@ zzim.addEventListener("click", () => {
     })
         .then((response) => response.json())
         .then((data) => {
+            console.log(data);
             if (Number(data) === 1) {
                 zzim.src = 'http://localhost/images/pullheart.png';
                 alert("찜 😍")
