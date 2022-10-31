@@ -1,6 +1,5 @@
 // 반경 설정
 const radiusButton = document.querySelectorAll("button");
-
 const myFavoriteCourseLink = document.getElementById("myFavoriteCourseLink");
 const myInfoLink = document.getElementById("myInfoLink");
 const loginLogout = document.getElementById("loginLogout");
@@ -17,7 +16,6 @@ window.addEventListener("DOMContentLoaded", () => {
     }
 
 })
-
 
 // 마커 커스텀 인데여;;
 var imageSrc = "../images/marker_img.png",
