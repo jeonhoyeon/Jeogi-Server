@@ -26,6 +26,9 @@ public class SignUpService implements ISignUpService{
 	
 	JSONParser parser = new JSONParser();       
 	
+	@Autowired
+	mailSendService mail;
+	
 	@Override
 	@Transactional
 	public int idCheck(Map signData) throws ParseException {     
@@ -64,7 +67,7 @@ public class SignUpService implements ISignUpService{
 	
 	@Override
 	@Transactional
-	public int emailCheck(Map signData) throws ParseException {
+	public int emailCheck(Map signData) throws ParseException {       
 			int email = signdao.emailCheck(signData.get("u_email").toString());
 		return email;
 	}
@@ -84,9 +87,10 @@ public class SignUpService implements ISignUpService{
 		signData.setU_update_id(signData.getU_id());
 		signData.setU_update_time(Timestamp.valueOf(LocalDateTime.now()));
 		signData.setU_flag(1);
-		signData.setU_email(signData.getU_email());
+
 		try {
 			signdao.signUp(signData);
+			signdao.authUp(signData.getU_email());
 			return 1;
 		}  
 		catch(Exception e) {
@@ -94,6 +98,22 @@ public class SignUpService implements ISignUpService{
 		}
 	}
 	
+	//이메일 중복확인 > 메일에 인증번호 보내기
+	public int emailCheckAuth(Map userEmail) {
+		if(signdao.emailCheck(userEmail.get("u_email").toString()) ==1 ){
+			return 0;
+		}
+		else {
+			mail.sendMailAuth(userEmail.get("u_email").toString());
+			return 1;
+		}
+	}
+	//auth check 
+	public int authCheck(Map userAuth) {
+		System.out.println("키값 확인 : "+userAuth.get("auth") );
+		int returnValue = signdao.authCheck("codeName"+userAuth.get("auth"),(String) userAuth.get("auth"));
+		return returnValue;
+	}
 
 	
 }

@@ -12,7 +12,16 @@ public class UserVo {
 	private String birth;
 	private int gender;
 	private int u_flag;
+	private String token;
 	
+	
+	
+	public String getToken() {
+		return token;
+	}
+	public void setToken(String token) {
+		this.token = token;
+	}
 	public String getU_nick() {
 		return u_nick;
 	}

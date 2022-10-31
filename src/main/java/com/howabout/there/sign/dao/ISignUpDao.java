@@ -1,6 +1,7 @@
 package com.howabout.there.sign.dao;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import com.howabout.there.sign.dto.SignUpDto;
 import com.howabout.there.sign.vo.UserVo;
@@ -18,5 +19,8 @@ public interface ISignUpDao {
 	public boolean nickCheck(String string);
 	//회원가입 EMAIL중복체크 DAO
 	public int emailCheck(String email);
-		
+	//회원가입 authTable email 추가하기
+	public void authUp(@Param("u_email")String email);
+	//이메일 인증 값 확인
+	public int authCheck(@Param("email")String email,@Param("auth")String auth);
 }

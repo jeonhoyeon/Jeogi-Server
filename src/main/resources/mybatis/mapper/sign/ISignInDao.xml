@@ -33,6 +33,25 @@
 		WHERE u_id = #{u_id};
 	</update>
 	
+	<!-- 이메일 인증코드 업데이트ㅓ-->
+	<insert id="setNewMailAuth">
+		INSERT emailauth
+		values (#{email}, #{auth}) 
+	</insert>
+	
+	<!-- 이메일 인증 값 비교-->
+	<select id="authCheck" resultType="Integer">
+		SELECT count(*)
+		FROM emailauth
+		WHERE email=#{email} AND authvalue=#{auth};
+	</select>
+	
+	<!-- 아이디 찾기 이메일로 유저 아이디 가지고 오기-->
+	<select id="getUserId" resultType="String">
+		SELECT u_id
+		FROM user
+		WHERE u_email = #{u_email};
+	</select>
 	
 	
 	

@@ -21,7 +21,7 @@ public class SplashService {
 	public Map getToken(String token) {
 		Map returnMap = new HashMap<>();
 		UserVo user = dao.userData(util.getUserIdFromToken(token));
-		String newToken = util.generateToken(user, user.getU_nick());
+		String newToken = util.generateToken(user, user.getU_id());
 		returnMap.put("jwt", newToken);
 		return returnMap;
 	}

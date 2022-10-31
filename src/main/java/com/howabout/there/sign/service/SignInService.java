@@ -15,6 +15,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.howabout.there.sign.dao.ISignInDao;
+import com.howabout.there.sign.dao.ISignUpDao;
 import com.howabout.there.sign.dto.LoginDto;
 import com.howabout.there.sign.vo.UserVo;
 import com.howabout.there.token.JWTUtil;
@@ -25,6 +26,12 @@ public class SignInService implements UserDetailsService  {
 
 	@Autowired
 	ISignInDao signDao;
+	
+	@Autowired
+	ISignUpDao signupdao;
+	
+	@Autowired
+	mailSendService mail;
 	
 	@Autowired
 	private JWTUtil jwtutil;
@@ -92,5 +99,34 @@ public class SignInService implements UserDetailsService  {
 	
 		return 	new org.springframework.security.core.userdetails.User(userVo.getU_id(),userVo.getU_pw(), new ArrayList<>());
 	}
+	
+	
+	//email값 받아서 유저 id를 메일로 보내기
+	public int sendId(Map userData, int function) {
+		String userId = signDao.getUserId(String.valueOf(userData.get("u_email")));
+		if(userId == null) {
+			return 0;
+		}else {
+		mail.sendContent(String.valueOf(userData.get("u_email")), userId,function);
+		return 1;}
+	}
+	
+	//email 받아서 인증번호 보내기 
+	public int sendAuth(Map userEmail) {
+		String email = userEmail.get("u_email").toString();
+		int emailexist = signupdao.emailCheck(email);
+		if(signupdao.emailCheck(email)==1) {
+			mail.sendMailAuth(email);
+			return 1;
+		}else {
+			return 0;
+		}
+		
+		
+		
+		
+	}
+	
+	
 	
 }

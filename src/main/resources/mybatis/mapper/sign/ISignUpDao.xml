@@ -19,8 +19,18 @@
 	<select id="emailCheck" resultType="Integer">
 		SELECT IF(COUNT(*) = 1, 1, 0)
 		FROM user WHERE u_email = #{u_email};
-	
 	</select>
 
-
+	<!-- 회원가입 EmailAuth TABLE Email push-->
+	<insert id="authUp">
+	INSERT INTO emailauth
+	VALUES(#{u_email}, "newUser");
+	</insert>
+	
+	<!-- 이메일 확인 인증값 체크-->
+	<select id="authCheck" resultType="Integer">
+		SELECT count(*)
+		FROM emailauth
+		WHERE email=#{email} AND authvalue=#{auth};
+	</select>
 </mapper>

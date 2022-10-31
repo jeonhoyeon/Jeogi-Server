@@ -1,12 +1,8 @@
 package com.howabout.there.sign.controller;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-
-import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,13 +10,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.howabout.there.sign.dao.ISignUpDao;
 import com.howabout.there.sign.dto.LoginDto;
 import com.howabout.there.sign.service.SignInService;
-import com.howabout.there.sign.service.mailTestService;
+import com.howabout.there.sign.service.SignUpService;
+import com.howabout.there.sign.service.mailSendService;
 import com.howabout.there.test.mailTest;
-import com.howabout.there.token.JWTUtil;
-
-import io.jsonwebtoken.Claims;
 
 
 @RestController
@@ -29,8 +24,10 @@ public class SignInRController {
 	@Autowired
 	SignInService signIn;
 	
+	
+	
 	@Autowired
-	mailTestService mail;
+	mailSendService mail;
 	
 	//로그인 기능 컨트롤러
 	@PostMapping("/login/signIn")
@@ -39,7 +36,6 @@ public class SignInRController {
 		System.out.println("H_0.0.3"+data.get("u_id"));
 		LoginDto userDto = new LoginDto();
 		userDto = signIn.loginCheck(data);
-		mail.send();
 		return userDto;
 	}
 	
@@ -67,24 +63,20 @@ public class SignInRController {
 		return 1;
 	}
 	
+	//이메일로 아이디를 보내서 아이디 찾기
+	@PostMapping("/login/sendIdEmail")
+	public int sendIdtoEmail(@RequestBody  Map userMail) {
+		System.out.println("adasddd"+userMail.toString());
+		System.out.println("보낸 이메일 값 @!@# : "+String.valueOf(userMail.get("u_email")));
+		int sendId = signIn.sendId(userMail, 1);
+		return sendId;
+	}
 	
-	@PostMapping("/testmap")
-	public int asdsad(@RequestBody Map tt) {
-		System.out.println("TEST MAP : "+ tt.get("first")+ " "+tt.get("second"));
+	//NEW 비밀번호 재설정 > 이메일로 인증번호 보내기
+	@PostMapping("/login/sendPwEmail")
+	public int sendPwEmail(@RequestBody Map userMail) {
+		signIn.sendAuth(userMail);
 		return 1;
-	}
-	@GetMapping("/mailTest")
-	public String asdsad() {
-		mailTest aa = new mailTest();
-		aa.adasdada();
-		return "11";
-	}
-	//Map으로 서버에 보내기
-	@GetMapping("/asendMap")
-	public Map<String,String> asdsddqdqad() {
-		Map<String,String> return1 = new HashMap <String, String>();
-		return1.put("aa", "asdsad");
-		return return1;	
 	}
 	
 }

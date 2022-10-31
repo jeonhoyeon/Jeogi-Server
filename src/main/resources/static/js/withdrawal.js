@@ -6,8 +6,8 @@ var select_reason =
 
 wd_btn.addEventListener("click", (e) => {
     e.preventDefault();
-const token = sessionStorage.getItem("jwt");
-const tokenHead = "Bearer " + token;
+    const token = sessionStorage.getItem("jwt");
+    const tokenHead = "Bearer " + token;
 
     //회원탈퇴 선택창 팝업
     var result = confirm("탈퇴하시겠습니까? ");
@@ -24,12 +24,13 @@ const tokenHead = "Bearer " + token;
             method: "POST",
             headers: {
                 "Content-type": "application/json",
-                "Authorization": tokenHead,},
+                "Authorization": tokenHead,
+            },
             body: JSON.stringify(arrReq),
         })
             .then((response) => response.json())
             .then((data) => {
-                console.log("response : " + data );
+                console.log("response : " + data);
                 if (Number(data) == 1) {
                     alert("탈퇴 처리되었습니다.");
                     location.href = "/mainPage";

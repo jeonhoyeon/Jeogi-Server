@@ -19,4 +19,9 @@ public interface ISignUpService {
 	
 	//EMAIL중복 체크 
 	public int emailCheck(Map signData) throws ParseException;
+	
+	
+	public int emailCheckAuth(Map emailData);
+	
+	public int authCheck(Map authCheck);
 }

@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.howabout.there.sign.service.mailTestService;
+import com.howabout.there.sign.service.mailSendService;
 
 
 
@@ -12,12 +12,11 @@ import com.howabout.there.sign.service.mailTestService;
 public class SignInController {
 	
 	@Autowired
-	mailTestService mail;
+	mailSendService mail;
 	
 	
 	@RequestMapping("/login/signIn")	
 	public String loginPage() {
-		mail.send();
 		return "login";
 	}
 }

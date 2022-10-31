@@ -18,4 +18,9 @@ public interface ISignInDao {
 	public int checkMyInfo(@Param("u_email")String u_email , @Param("u_id")String u_id );
 	//비밀번호 재설정
 	public int setMyPw(@Param("u_id")String myId , @Param("u_pw") String myNewPw);
+	//새로운 이메일 인증코드 업데이트
+	public void setNewMailAuth(@Param("auth")String auth, @Param("email")String email);
+	//아이디 찾기 이메일로 아이디 찾아오기
+	public String getUserId(@Param("u_email")String email);
+	
 }

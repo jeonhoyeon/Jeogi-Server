@@ -25,33 +25,44 @@ import com.howabout.there.token.JWTUtil;
 @RestController
 @RequestMapping("/myPage/myInfo")
 public class MyPageRController {
-	
+
 	@Autowired
 	MyPageService myPageService;
-	
+
 	@Autowired
 	JWTUtil util;
-	
+
 	//유저 정보 업데이트. 회원정보 수정
 	@PostMapping("/updateInfo")
-	public UserDto updateUser(@RequestBody UserVo uservo){
-		UserDto user = myPageService.userUpdate(uservo);
+	public Map updateUser(HttpServletRequest request, @RequestBody UserVo uservo){
+		String tokenkey = request.getHeader("Authorization").substring(7);
+		String userNick = util.getUserNickFromToken(tokenkey);
+		Map user = myPageService.userUpdate(uservo, userNick);
+
 		return user;
 	}
-	
+
 	//회원탈퇴. 비밀번호 확인 -> 비밀번호가 일치하면 1 반환. 서버에서 flag 0으로 업데이트
 	@PostMapping("/withdrawal")
-	public int withdrawal(HttpServletRequest request,@RequestBody ArrayList<JSONObject> data) throws ParseException {
+	public int withdrawl(HttpServletRequest request,@RequestBody ArrayList<JSONObject> data) throws ParseException {
 		String tokenkey = request.getHeader("Authorization").substring(7);
 		UserDto userUp = myPageService.userListUp(util.getUserIdFromToken(tokenkey));
 		BCryptPasswordEncoder encoder = new  BCryptPasswordEncoder();
-		if(! encoder.matches(userUp.getU_pw(), (String) data.get(0).get("u_pw"))) {
+		System.out.println("-------id: "+(String) data.get(0).get("u_id"));
+		System.out.println("-------"+(String) data.get(0).get("u_pw"));
+		System.out.println("-------"+encoder.matches(userUp.getU_pw(), (String) data.get(0).get("u_pw")));
+//      if(! encoder.matches(userUp.getU_pw(), (String) data.get(0).get("u_pw"))) {
+
+		if(! encoder.matches( (String) data.get(0).get("u_pw") ,userUp.getU_pw())) {
+			System.out.println("비밀번호 틀림");
 			return 0;
 		}else {
-			return myPageService.withdrawal(data);
+			return myPageService.withdrawal(userUp, data.get(0));
 		}
+
+
 	}
-	
+
 	//비밀번호 확인. 비밀번호 일치하면 1, 불일치하면 0 반환.
 	@PostMapping("/CheckPW")
 	public int checkPW(HttpServletRequest request, @RequestBody Map data) throws ParseException {
@@ -70,7 +81,7 @@ public class MyPageRController {
 		}
 
 	}
-	
+
 	//유저정보 가지고 오기
 	@PostMapping("/getMyData")
 	public UserDto userUp(HttpServletRequest request){
@@ -81,11 +92,11 @@ public class MyPageRController {
 		// userID로 유저의 정보를 가지고 온다
 		UserDto userUp = myPageService.userListUp(userId);
 		System.out.println("유저 정보 : " + userUp.toString());
-		System.out.println("user ID : " + userUp.getU_id());
+//      System.out.println("user ID : " + userUp.getU_id());
 		return userUp;
 	}
-	
-	//TEST용 
+
+	//TEST용
 	@PostMapping("/testlogin/token")
 	public String testTOKEN (HttpServletRequest request) {
 		System.out.println("444444433332211");
@@ -97,5 +108,5 @@ public class MyPageRController {
 		System.out.println(ss + " " + zz + " "+ qq);
 		return ss;
 	}
-	
+
 }
