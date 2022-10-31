@@ -72,7 +72,7 @@ identification.addEventListener("click", () => {
         .then((userData) => {
             console.log("받은 데이터: " + userData);
             if (Number(userData) == 1) {
-                alert("비밀번호 맞음");
+                location.href="/myPage/myInfo/updateInfo"
             } else {
                 alert("비밀번호 틀림");
             }

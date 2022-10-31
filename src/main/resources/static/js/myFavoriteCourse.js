@@ -8,7 +8,7 @@ let markers = [];
 let polylines = [];
 
 const token = sessionStorage.getItem('jwt');
-const tokenHead = "Bearee " + token;
+const tokenHead = "Bearer " + token;
 
 //페이지 접속하자마자 실행할 수 있도록 DOMContentLoaded 이벤트 생성
 window.addEventListener("DOMContentLoaded", () => {
