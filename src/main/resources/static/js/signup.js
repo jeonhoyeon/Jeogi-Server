@@ -27,7 +27,6 @@ window.onload = () => {
 const aaa = document.getElementById("user_id");
 
 const signup = () => {
-  alert("가입완료");
   const req = {
     u_email: userEmail.value,
     u_id: userId.value,
@@ -39,7 +38,7 @@ const signup = () => {
 
   console.log(req);
   console.log(JSON.stringify(req));
-  fetch("/signttt", {
+  fetch("/login/signUp", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(req),
@@ -48,8 +47,8 @@ const signup = () => {
     .then((data) => {
       console.log("response : " + data + " TYPE : " + typeof data);
       if (Number(data) == 1) {
-        // form.submit();
-        //goreplace(/sign/signUp);
+        alert("가입완료");
+        location.href="/mainPage";
       } else {
         alert("다시 확인해!!!!");
       }
