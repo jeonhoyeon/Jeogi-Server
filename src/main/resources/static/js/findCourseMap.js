@@ -9,6 +9,7 @@ const choiceComplete = document.getElementById("choiceComplete");
 let startPosition, secondPosition, thirdPosition;
 // 장소
 let rId, cId;
+let restJson, cafeJson;
 
 //마커를 담을 배열
 var markers = [];
@@ -34,6 +35,24 @@ choiceComplete.addEventListener("click", () => {
     let completeStr = "코스완성!"
     addInfoItems(findCourseListArea, completeStr);
     // 마커, 폴리라인 추가
+
+    const arrReq = [];
+    arrReq.push(restJson);
+    arrReq.push(cafeJson);
+
+    console.log(arrReq);
+    fetch("/myCourse/saveCourse", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": heretokenHead,
+        },
+        body: JSON.stringify(arrReq),
+    })
+        .then((response) => response.json())
+        .then((data) => {
+            console.log(data);
+        })
 })
 
 var mapContainer = document.getElementById("map"), // 지도를 표시할 div
@@ -275,6 +294,7 @@ function secondPlacesSearchCB(data, status, pagination) {
             addInfoItems(findCourseListArea, choiceCafe);
 
             // 선택한 식당의 id값
+            restJson = data[i];
             rId = data[i].id;
             console.log("식당ID: " + rId);
             console.log(data[i].place_name);
@@ -290,6 +310,8 @@ function secondPlacesSearchCB(data, status, pagination) {
         });
     }
 }
+
+console.log(restJson);
 
 // 키워드 검색 완료 시 호출되는 콜백함수 입니다
 function thirdPlacesSearchCB(data, status, pagination) {
@@ -309,6 +331,7 @@ function thirdPlacesSearchCB(data, status, pagination) {
             addInfoItems(findCourseListArea, matching);
 
             // 선택한 카페의 id값
+            cafeJson = data[i];
             cId = data[i].id;
             console.log("카페ID: " + cId);
             console.log(data[i].place_name);
