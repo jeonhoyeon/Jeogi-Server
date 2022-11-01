@@ -88,3 +88,12 @@
   background: #ff5757;
   color: white;
 }
+.findPw-back a {
+  color: #333;
+  font-size: 12px;
+  text-decoration: none;
+
+  /*현재 위치에서 상대적 이동 */
+  position: relative;
+  top: -2px;
+}
