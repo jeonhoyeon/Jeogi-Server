@@ -1,81 +1,86 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko">
 
 <head>
-	<meta charset="UTF-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<title>MainPage</title>
-	<link rel="stylesheet" href="/css/main.css" />
+  <meta charset="UTF-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MainPage</title>
+  <link rel="stylesheet" href="/css/main.css"/>
   <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon">
 </head>
 
 <body>
-	<!-- header start -->
-	<header class="main-header">
-		<div>
-			<a href="/mainPage">
-				<img src="../images/logo_white.png" alt="logo" id="jeogi-logo__img" width="180px" />
-			</a>
-		</div>
-		<nav class="main-nav__list">
-			<ul>
-				<li>
-					<a href="/popularCourse">인기코스</a>
-				</li>
-				<li>
-					<a href="/findCourse/webCourse">코스찾기</a>
-				</li>
-				<li id="myFavoriteCourseLink">
-					<a href="/myCourse/myCourseSite">내코스</a>
-				</li>
-				<li id="myInfoLink">
-					<a href="/myPage/myInfo/webData" style="cursor:pointer;">마이페이지</a>
-				</li>
-				<li>
-					<a id="loginLogout" style="cursor:pointer">로그인</a>
-				</li>
-			</ul>
-		</nav>
-		<div class="dropdown">
-			<div class="dropdown__icon">
-				<span></span>
-				<span></span>
-				<span></span>
-			</div>
-			<div class="dropdown__content">
-				<a href="#">찜목록</a>
-				<a href="#">마이페이지</a>
-				<a href="#">로그인</a>
-			</div>
-		</div>
-	</header>
-	<!-- header end -->
+<!-- header start -->
+<header class="main-header">
+  <div>
+    <a href="/mainPage">
+      <img src="../images/logo_white.png" alt="logo" id="jeogi-logo__img" width="180px"/>
+    </a>
+  </div>
+  <nav class="main-nav__list">
+    <ul>
+      <li>
+        <a href="/popularCourse">인기코스</a>
+      </li>
+      <li>
+        <a href="/findCourse/webCourse">코스찾기</a>
+      </li>
+      <li id="myFavoriteCourseLink">
+        <a href="/myCourse/myCourseSite">내코스</a>
+      </li>
+      <li id="myInfoLink">
+        <a href="/myPage/myInfo/webData" style="cursor:pointer;">마이페이지</a>
+      </li>
+      <li>
+        <a id="loginLogout" style="cursor:pointer">로그인</a>
+      </li>
+    </ul>
+  </nav>
+  <div class="dropdown">
+    <div class="dropdown__icon">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <div class="dropdown__content">
+      <a href="#">찜목록</a>
+      <a href="#">마이페이지</a>
+      <a href="#">로그인</a>
+    </div>
+  </div>
+</header>
+<!-- header end -->
 
-	<!-- content start -->
-	<main class="main-container">
-		<article class="main-content">
-			<div class="test1">
-				<div class="test1_1" onclick="location.href='/popularCourse'" style="cursor: pointer">
-					<span> 인기코스 </span>
-				</div>
-				<div class="test1_2" onclick="location.href='/findCourse/webCourse'">
-					<span>코스찾기</span>
-				</div>
-			</div>
+<!-- content start -->
+<main class="main-container">
+  <article class="main-content">
+    <div id="main-content-haha" style="border: 2px solid #eee; margin-bottom: 1em; text-align: center;">
 
-			<div class="test2">
-				<div class="test2_1" onclick="location.href='/myCourse/myCourseSite'" id="myPageContainerLocation">
-					<span>내코스</span>
-				</div>
-				<div class="test2_2">
-					<span> </span>
-				</div>
-			</div>
-		</article>
-		<!-- content end -->
-	</main>
-	<script src="/js/main.js"></script>
+      <div>
+        <lottie-player src="https://assets3.lottiefiles.com/packages/lf20_6pjojgtl.json" background="transparent"
+                       speed="1" style="border: 2px solid #eee; width: 300px; height: 300px;" loop
+                       autoplay></lottie-player>
+      </div>
+
+      <div class="test1_1" onclick="location.href='/popularCourse'" style="cursor: pointer">
+        <span> 인기코스 </span>
+      </div>
+
+      <div class="test1_2" onclick="location.href='/findCourse/webCourse'">
+        <span>코스찾기</span>
+      </div>
+
+      <div class="test2_1" onclick="location.href='/myCourse/myCourseSite'" id="myPageContainerLocation">
+        <span>내코스</span>
+      </div>
+
+    </div>
+  </article>
+  <!-- content end -->
+</main>
+<script src="/js/main.js"></script>
+<script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
 </body>
 
 </html>
