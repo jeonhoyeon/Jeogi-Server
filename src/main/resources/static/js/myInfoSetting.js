@@ -101,7 +101,7 @@ re_new_password.addEventListener("blur", () => {
 
 // new nickname checked
 new_nickname.addEventListener("blur", () => {
-    if(new_nickname.value === userNick) {
+    if (new_nickname.value === userNick) {
         alert("기존 닉네임");
     } else {
         const new_nick = {u_nick: new_nickname.value,};

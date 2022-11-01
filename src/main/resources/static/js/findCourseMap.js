@@ -40,29 +40,33 @@ choiceComplete.addEventListener("click", () => {
     addInfoItems(findCourseListArea, completeStr);
     // 마커, 폴리라인 추가
 
-    const arrReq = [];
-    arrReq.push(restJson);
-    arrReq.push(cafeJson);
+    if (token !== null) {
+        const arrReq = [];
+        arrReq.push(restJson);
+        arrReq.push(cafeJson);
 
-    console.log(arrReq);
-    fetch("/myCourse/saveCourse", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            "Authorization": heretokenHead,
-        },
-        body: JSON.stringify(arrReq),
-    })
-        .then((response) => response.json())
-        .then((data) => {
-            console.log(data);
-            if (data.flag === 1) {
-                // 찜아이콘 변경
-                zzim.src = 'http://localhost/images/pullheart.png';
-            } else {
-                zzim.src = 'http://localhost/images/heart.png';
-            }
+        console.log(arrReq);
+        fetch("/myCourse/saveCourse", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": heretokenHead,
+            },
+            body: JSON.stringify(arrReq),
         })
+            .then((response) => response.json())
+            .then((data) => {
+                console.log(data);
+                if (data.flag === 1) {
+                    // 찜아이콘 변경
+                    zzim.src = 'http://localhost/images/pullheart.png';
+                } else {
+                    zzim.src = 'http://localhost/images/heart.png';
+                }
+            })
+    } else {
+        alert("매칭완료");
+    }
 })
 
 var mapContainer = document.getElementById("map"), // 지도를 표시할 div
@@ -688,31 +692,36 @@ function removeAllChildNods(el) {
 }
 
 zzim.addEventListener("click", () => {
-    const req = {
-        r_id: rId,
-        c_id: cId,
-    }
+    if (token !== null) {
+        const req = {
+            r_id: rId,
+            c_id: cId,
+        }
 
-    fetch("/myCourse/courseDibs", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            "Authorization": heretokenHead,
-        },
-        body: JSON.stringify(req),
-    })
-        .then((response) => response.json())
-        .then((data) => {
-            console.log(data);
-            if (Number(data) === 1) {
-                zzim.src = 'http://localhost/images/pullheart.png';
-                alert("찜 😍")
-                console.log("res: " + rId + ", cafe: " + cId);
-                console.log("성공");
-            } else {
-                console.log("실패");
-            }
+        fetch("/myCourse/courseDibs", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": heretokenHead,
+            },
+            body: JSON.stringify(req),
         })
+            .then((response) => response.json())
+            .then((data) => {
+                console.log(data);
+                if (Number(data) === 1) {
+                    zzim.src = 'http://localhost/images/pullheart.png';
+                    alert("찜 😍")
+                    console.log("res: " + rId + ", cafe: " + cId);
+                    console.log("성공");
+                } else {
+                    console.log("실패");
+                }
+            })
+    } else {
+        alert("로그인 후 이용해주세요 :)");
+        location.href="/login/signIn";
+    }
 })
 
 if (zzim.src === "http://localhost/images/pullheart.png") {

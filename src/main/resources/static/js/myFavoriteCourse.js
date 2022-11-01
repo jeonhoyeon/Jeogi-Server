@@ -28,8 +28,7 @@ window.addEventListener("DOMContentLoaded", () => {
     })
         .then((response) => response.json())
         .then((myFavoriteData) => {
-            console.log("response : " + myFavoriteData);
-
+            console.log("response : " + JSON.stringify(myFavoriteData));
             addItems(myFavoriteData);
         });
 
@@ -128,7 +127,9 @@ function addItems(dateInfo) {
         let choiceEl = document.createElement("div"),
             itemStr =
                 "<div>" +
-                "<div class='my-fav-list__description'>" +
+                "<div class='my-fav-list__description' style='background: url(" +
+                dateInfo[i].r_image_url +
+                "); background-size: contain; background-repeat: no-repeat; background-position: center;'>" +
                 "<h5 class='first'>" +
                 dateInfo[i].r_name +
                 "</h5>" +
@@ -145,7 +146,9 @@ function addItems(dateInfo) {
             "</div>" +
             "</div>" +
             "<div>" +
-            "<div class='my-fav-list__description'>" +
+            "<div class='my-fav-list__description' style='background: url(" +
+            dateInfo[i].c_image_url +
+            "); background-size: contain; background-repeat: no-repeat; background-position: center;'>" +
             "<h5 class='second'>" +
             dateInfo[i].c_name +
             "</h5>" +
