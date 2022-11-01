@@ -31,8 +31,10 @@ public class MyPageService implements IMyPageService{
 		int resultUpdate;
 		String newToken="";
 		if(uservo.getU_pw()==null) {
+			System.out.println("pw is null @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 			uservo.setU_pw("");
 		}else {
+			System.out.println("pw not null #######################################################################################################################");
 			String newPw = encoder.encode(uservo.getU_pw());
 			String queryPW = ", u_pw = \""+newPw+"\"";
 			uservo.setU_pw(queryPW);

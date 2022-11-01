@@ -11,6 +11,7 @@ const women = document.getElementById("women");
 const men = document.getElementById("men");
 const token = sessionStorage.getItem('jwt');
 const tokenHead = "Bearer " + token;
+let userNick;
 
 // let passPass = false;
 // let nickPass = false;
@@ -29,32 +30,39 @@ window.addEventListener("DOMContentLoaded", () => {
             "Content-Type": "application/json",
             "Authorization": tokenHead,
         },
-        // body: JSON.stringify(arrReq),
     })
         .then((response) => response.json())
         .then((infoData) => {
-            //서버에서 u_id 보내줌
             console.log(infoData);
             let idUser = infoData.u_id;
             user_id.value = idUser;
             let nickUser = infoData.u_nick;
+            userNick = infoData.u_nick;
+            console.log(userNick);
             new_nickname.value = nickUser;
-            //생년월일, 성별 체크 해야함 + 비밀번호 변경안할때 기존 비밀번호로 보내기
-            // let birthUser = infoData.birth;
-            // userBirth.value = birthUser;
+            let birthUser = infoData.birth;
+            const word = birthUser.split("-");
+            console.log(word[0]);
+            console.log(word[1]);
+            console.log(word[2]);
+            new_birth_year.options[new_birth_year.selectedIndex].text = word[0];
+            new_birth_month.options[new_birth_month.selectedIndex].text = word[1];
+            new_birth_day.options[new_birth_day.selectedIndex].text = word[2];
             if (infoData.gender == 0) {
-                women.value = 0;
+                women.checked = true;
             } else {
-                men.value = 1;
+                men.checked = true;
             }
         });
 });
 
 // new password checked
 re_new_password.addEventListener("blur", () => {
-    if (re_new_password.value != new_password.value) {
+    if (re_new_password.value === "" && new_password.value === "") {
+        console.log("기존비번");
+    } else if (re_new_password.value != new_password.value) {
         console.log("비밀번호 불일치");
-        console.log("비밀번호: " + new_password.value + " 비밀번호 재입력: "+ re_new_password.value);
+        console.log("비밀번호: " + new_password.value + " 비밀번호 재입력: " + re_new_password.value);
     } else {
         console.log("비밀번호 일치");
         passPass = true;
@@ -65,33 +73,70 @@ re_new_password.addEventListener("blur", () => {
 
 // new nickname checked
 new_nickname.addEventListener("blur", () => {
-    const new_nick = {u_nick: new_nickname.value,};
+    if(new_nickname.value === userNick) {
+        alert("기존 닉네임");
+    } else {
+        const new_nick = {u_nick: new_nickname.value,};
 
-    console.log(new_nick);
-    console.log(JSON.stringify(new_nick));
-    fetch("/login/signUp/nickCheck", {
-        method: "POST",
-        headers: {"Content-type": "application/json"},
-        body: JSON.stringify(new_nick),
-    })
-        .then((response) => response.json())
-        .then((newnickdata) => {
-            console.log("newnickdata : " + newnickdata);
-            if (Number(newnickdata) == 1) {
-                alert("사용할 수 있는 닉네임입니다.");
-                nickPass = true;
-            } else if(Number(newnickdata) == 0){
-                alert("중복입니다. 다시 입력해주세요. ");
-            } else if(Number(newnickdata) == 2) {
-                alert("서버 오류");
-            }
-        });
+        console.log(new_nick);
+        console.log(JSON.stringify(new_nick));
+        fetch("/login/signUp/nickCheck", {
+            method: "POST",
+            headers: {"Content-type": "application/json"},
+            body: JSON.stringify(new_nick),
+        })
+            .then((response) => response.json())
+            .then((newnickdata) => {
+                console.log("newnickdata : " + newnickdata);
+                if (Number(newnickdata) == 1) {
+                    alert("사용할 수 있는 닉네임입니다.");
+                    nickPass = true;
+                } else if (Number(newnickdata) == 0) {
+                    alert("중복입니다. 다시 입력해주세요. ");
+                } else if (Number(newnickdata) == 2) {
+                    alert("서버 오류");
+                }
+            });
+    }
 });
 // new nickname checked
 
 // user info saved
+
 save_data.addEventListener("click", () => {
     // if (passPass == true && nickPass == true) {
+    if (re_new_password.value === "" && new_password.value === "") {
+        const req = {
+            u_nick: new_nickname.value,
+            gender: document.querySelector('input[name="new-gender"]:checked').value,
+            birth:
+                new_birth_year.value +
+                "-" +
+                new_birth_month.value +
+                "-" +
+                new_birth_day.value,
+        };
+        // const arrReq = [];
+        // arrReq.push(req);
+
+        console.log(req);
+        console.log(JSON.stringify(req));
+        fetch("/myPage/myInfo/updateInfo", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": tokenHead,
+            },
+            body: JSON.stringify(req),
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                console.log("data: " + data.jwt);
+                alert("변경되었습니다.");
+                location.href = "/myPage/myInfo/webData";
+            });
+        // }
+    } else {
         const req = {
             u_nick: new_nickname.value,
             u_pw: new_password.value,
@@ -110,8 +155,10 @@ save_data.addEventListener("click", () => {
         console.log(JSON.stringify(req));
         fetch("/myPage/myInfo/updateInfo", {
             method: "POST",
-            headers: {"Content-Type": "application/json",
-                         "Authorization": tokenHead,},
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": tokenHead,
+            },
             body: JSON.stringify(req),
         })
             .then((response) => response.json())
@@ -120,7 +167,8 @@ save_data.addEventListener("click", () => {
                 alert("변경되었습니다.");
                 location.href = "/myPage/myInfo/webData";
             });
-    // }
+        // }
+    }
 });
 // user info saved
 
