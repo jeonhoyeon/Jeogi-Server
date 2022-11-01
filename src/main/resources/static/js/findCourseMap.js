@@ -4,6 +4,10 @@ const secondArea = document.getElementById("resChoice");
 const thirdArea = document.getElementById("cafeChoice");
 const addDateListButton = document.getElementsByClassName("addDateListButton");
 const choiceComplete = document.getElementById("choiceComplete");
+const zzim = document.getElementById("zzim");
+
+const heretoken = sessionStorage.getItem("jwt");
+const heretokenHead = "Bearer " + heretoken;
 
 // 위치
 let startPosition, secondPosition, thirdPosition;
@@ -52,6 +56,12 @@ choiceComplete.addEventListener("click", () => {
         .then((response) => response.json())
         .then((data) => {
             console.log(data);
+            if (data.flag === 1) {
+                // 찜아이콘 변경
+                zzim.src = 'http://localhost/images/pullheart.png';
+            } else {
+                zzim.src = 'http://localhost/images/heart.png';
+            }
         })
 })
 
@@ -281,6 +291,8 @@ function secondPlacesSearchCB(data, status, pagination) {
     if (status === kakao.maps.services.Status.OK) {
         for (var i = 0; i < data.length; i++) {
             displayPlaces(data);
+            // 찜아이콘 변경
+            zzim.src = 'http://localhost/images/heart.png';
             //addItems(data[i], secondArea);
         }
     }
@@ -311,13 +323,13 @@ function secondPlacesSearchCB(data, status, pagination) {
     }
 }
 
-console.log(restJson);
-
 // 키워드 검색 완료 시 호출되는 콜백함수 입니다
 function thirdPlacesSearchCB(data, status, pagination) {
     if (status === kakao.maps.services.Status.OK) {
         for (var i = 0; i < data.length; i++) {
             displayPlaces(data);
+            // 찜아이콘 변경
+            zzim.src = 'http://localhost/images/heart.png';
             //addItems(data[i], secondArea);
         }
     }
@@ -427,6 +439,9 @@ function displayPlaces(places) {
 
     // 지도에 표시되고 있는 마커를 제거합니다
     removeMarker();
+
+    // 찜아이콘 변경
+    zzim.src = 'http://localhost/images/heart.png';
 
     for (var i = 0; i < places.length; i++) {
         // 마커를 생성하고 지도에 표시합니다
@@ -671,11 +686,6 @@ function removeAllChildNods(el) {
         el.removeChild(el.lastChild);
     }
 }
-
-const zzim = document.getElementById("zzim");
-
-const heretoken = sessionStorage.getItem("jwt");
-const heretokenHead = "Bearer " + heretoken;
 
 zzim.addEventListener("click", () => {
     const req = {
