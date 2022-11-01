@@ -90,7 +90,7 @@ public class MyCourseService implements IMyCourseService {
 	      
 	   
 		   
-		   if(courseDao.exisCheck(jwtutil.getUserNickFromToken(token),data.get(0).get("id").toString(),data.get(0).get("id").toString())==0) {
+		   if(courseDao.exisCheck(jwtutil.getUserNickFromToken(token),data.get(0).get("id").toString(),data.get(1).get("id").toString())==0) {
 //				FIND REST REVIEW 
 			   System.out.println("REST URL : "+data.get(0).get("place_url").toString());
 			   r_review = findcourseDao.getReview(data.get(0).get("place_url").toString());
