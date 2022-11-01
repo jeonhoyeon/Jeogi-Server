@@ -24,6 +24,22 @@
   outline: none;
 }
 
+#yourIdContainer {
+  width: 15em;
+  margin: 0 auto;
+  margin-bottom: 0.5em;
+  display: none;
+}
+
+#yourIdContainer > input {
+  width: 15.8em;
+  padding: 0.5em 0.75em;
+  padding-left: 1em;
+  border: 2px solid #eee;
+  border-radius: 5px;
+  outline: none;
+}
+
 #findId-info__birth {
   width: 15em;
   margin: 0 auto;

@@ -19,6 +19,14 @@
   align-items: center;
 }
 
+#myFavoriteCourseLink {
+  display:none;
+}
+
+#myInfoLink {
+  display: none;
+}
+
 .ingi__header .ingi__nav__list ul li {
   display: inline;
   margin-right: 10px;

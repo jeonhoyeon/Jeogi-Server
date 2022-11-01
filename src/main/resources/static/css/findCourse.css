@@ -103,6 +103,14 @@
     font-weight: bold;
 }
 
+#myFavoriteCourseLink {
+    display:none;
+}
+
+#myInfoLink {
+    display: none;
+}
+
 .choice-list-container > div:last-child img {
     cursor: pointer;
     width: 2.5em;
