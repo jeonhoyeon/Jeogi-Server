@@ -93,7 +93,6 @@ public class SignUpService implements ISignUpService{
 
 		try {
 			signdao.signUp(signData);
-			signdao.authUp(signData.getU_email());
 			return 1;
 		}  
 		catch(Exception e) {
