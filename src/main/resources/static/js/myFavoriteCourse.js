@@ -35,6 +35,20 @@ window.addEventListener("DOMContentLoaded", () => {
 
 })
 
+loginLogout.addEventListener("click", () => {
+    if (token == null) {
+        location.href = "/login/signIn";
+    } else {
+        const logout = confirm("정말 떠나실 거에요? ㅠㅠ");
+        if (logout) {
+            sessionStorage.clear();
+            location.href = "/mainPage";
+        } else {
+            alert("히히")
+        }
+    }
+})
+
 // 지도에 표시할 선을 생성합니다
 function addPolyline(firstPosition, secondPosition, idx) {
     linePath = [firstPosition, secondPosition];

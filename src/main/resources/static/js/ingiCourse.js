@@ -89,6 +89,20 @@ window.addEventListener("DOMContentLoaded", () => {
         });
 });
 
+loginLogout.addEventListener("click", () => {
+    if (token == null) {
+        location.href = "/login/signIn";
+    } else {
+        const logout = confirm("정말 떠나실 거에요? ㅠㅠ");
+        if (logout) {
+            sessionStorage.clear();
+            location.href = "/mainPage";
+        } else {
+            alert("히히")
+        }
+    }
+})
+
 // 모든 옵션을 선택한 후, 검색버튼을 눌렀을 때의 이벤트 시작
 ingiSearch.addEventListener("click", () => {
     removeAllChildNods(items);
