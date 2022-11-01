@@ -32,28 +32,6 @@ public class MyPageRController {
     @Autowired
     JWTUtil util;
 
-<<<<<<< HEAD
-	//유저 정보 업데이트. 회원정보 수정
-	@PostMapping("/updateInfo")
-	public Map updateUser(HttpServletRequest request, @RequestBody UserVo uservo){
-		String tokenkey = request.getHeader("Authorization").substring(7);
-		String userNick = util.getUserNickFromToken(tokenkey);
-		String userId = util.getUserIdFromToken(tokenkey);
-		uservo.setU_id(userId);
-		Map user = myPageService.userUpdate(uservo, userNick);
-
-		return user;
-	}
-	//회원탈퇴. 비밀번호 확인 -> 비밀번호가 일치하면 1 반환. 서버에서 flag 0으로 업데이트
-	@PostMapping("/withdrawal")
-	public int withdrawl(HttpServletRequest request,@RequestBody ArrayList<JSONObject> data) throws ParseException {
-		String tokenkey = request.getHeader("Authorization").substring(7);
-		UserDto userUp = myPageService.userListUp(util.getUserIdFromToken(tokenkey));
-		BCryptPasswordEncoder encoder = new  BCryptPasswordEncoder();
-		System.out.println("-------id: "+(String) data.get(0).get("u_id"));
-		System.out.println("-------"+(String) data.get(0).get("u_pw"));
-		System.out.println("-------"+encoder.matches(userUp.getU_pw(), (String) data.get(0).get("u_pw")));
-=======
     //유저 정보 업데이트. 회원정보 수정
     @PostMapping("/updateInfo")
     public Map updateUser(HttpServletRequest request, @RequestBody UserVo uservo) {
@@ -75,7 +53,6 @@ public class MyPageRController {
         System.out.println("-------id: " + (String) data.get(0).get("u_id"));
         System.out.println("-------" + (String) data.get(0).get("u_pw"));
         System.out.println("-------" + encoder.matches(userUp.getU_pw(), (String) data.get(0).get("u_pw")));
->>>>>>> 40be751c529bdabcaf1cb35f4be3dc08f9642626
 //      if(! encoder.matches(userUp.getU_pw(), (String) data.get(0).get("u_pw"))) {
 
         if (!encoder.matches((String) data.get(0).get("u_pw"), userUp.getU_pw())) {
