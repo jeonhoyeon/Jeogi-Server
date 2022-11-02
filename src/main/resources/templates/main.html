@@ -11,6 +11,16 @@
 </head>
 
 <body>
+<div class="test1_0">
+
+  <lottie-player src="https://assets10.lottiefiles.com/packages/lf20_zprb9vzj.json"
+                 background="transparent"
+                 speed="1"
+                 style="margin-top: 2px; border-bottom: 2px solid #eee; width: 100%; height: 100%;"
+                 loop
+                 autoplay>
+  </lottie-player>
+</div>
 <!-- header start -->
 <header class="main-header">
   <div>
@@ -55,30 +65,42 @@
 <!-- content start -->
 <main class="main-container">
   <article class="main-content">
-    <div id="main-content-haha" style="border: 2px solid #eee; margin-bottom: 1em; text-align: center;">
+    <div id="main-content-haha">
 
-      <div>
-        <lottie-player src="https://assets3.lottiefiles.com/packages/lf20_6pjojgtl.json" background="transparent"
-                       speed="1" style="border: 2px solid #eee; width: 300px; height: 300px;" loop
-                       autoplay></lottie-player>
+
+      <div id="jeogiLinkContainer">
+
+        <div onclick="location.href='/popularCourse'">
+          <span> 인기코스 </span>
+        </div>
+
+        <div onclick="location.href='/findCourse/webCourse'">
+          <span> 코스찾기 </span>
+        </div>
+
+        <div onclick="location.href='/myCourse/myCourseSite'" id="myPageContainerLocation">
+          <span> 내코스 </span>
+        </div>
+
       </div>
 
-      <div class="test1_1" onclick="location.href='/popularCourse'" style="cursor: pointer">
-        <span> 인기코스 </span>
-      </div>
+      <!--      <div class="test1_1" onclick="location.href='/popularCourse'" style="cursor: pointer">-->
+      <!--        <span> 인기코스 </span>-->
+      <!--      </div>-->
 
-      <div class="test1_2" onclick="location.href='/findCourse/webCourse'">
-        <span>코스찾기</span>
-      </div>
+      <!--      <div class="test1_2" onclick="location.href='/findCourse/webCourse'">-->
+      <!--        <span>코스찾기</span>-->
+      <!--      </div>-->
 
-      <div class="test2_1" onclick="location.href='/myCourse/myCourseSite'" id="myPageContainerLocation">
-        <span>내코스</span>
-      </div>
+      <!--      <div class="test2_1" onclick="location.href='/myCourse/myCourseSite'" id="myPageContainerLocation">-->
+      <!--        <span>내코스</span>-->
+      <!--      </div>-->
 
     </div>
   </article>
   <!-- content end -->
 </main>
+
 <script src="/js/main.js"></script>
 <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
 </body>
