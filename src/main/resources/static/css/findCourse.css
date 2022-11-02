@@ -8,13 +8,16 @@
     letter-spacing: 1px;
 }
 
+body {
+    overflow: hidden;
+}
+
 /* header */
 .find-course__header {
-    padding: 5px 60px;
+    padding: 1em 60px;
     display: flex;
     justify-content: space-between;
-    background: #ff5757;
-    box-shadow: 0 2px 1px #ff5757;
+    background: none;
     align-items: center;
 }
 
@@ -24,11 +27,11 @@
 }
 
 .find-course__header .find-course__nav__list {
-    background: #ff5757;
 }
 
 .find-course__header .find-course__nav__list ul li a {
     color: white;
+    font-size: 1.25em;
     font-weight: bold;
 }
 
@@ -40,7 +43,7 @@
     /* width: 70em; */
     height: 37em;
     max-width: 95%;
-    margin: 2rem auto;
+    margin: 0 auto;
     /* box-shadow: 0 1px 5px #ff5757; */
     border: 2px solid #ff5757;
     border-radius: 7px;

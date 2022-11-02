@@ -9,13 +9,16 @@
   letter-spacing: 1px;
 }
 
+body {
+  overflow: hidden;
+}
+
 /* header */
 .ingi__header {
-  padding: 5px 60px;
+  padding: 1em 60px;
   display: flex;
   justify-content: space-between;
-  background: #ff5757;
-  box-shadow: 0 2px 1px #ff5757;
+  background: none;
   align-items: center;
 }
 
@@ -33,11 +36,11 @@
 }
 
 .ingi__header .ingi__nav__list {
-  background: #ff5757;
 }
 
 .ingi__header .ingi__nav__list ul li a {
   color: white;
+  font-size: 1.25em;
   font-weight: bold;
 }
 /* header */
@@ -48,7 +51,7 @@
   /* width: 70em; */
   height: 37em;
   max-width: 95%;
-  margin: 2rem auto;
+  margin: 0 auto;
   border: 2px solid #ff5757;
   border-radius: 7px;
   padding: 1em;
@@ -161,10 +164,6 @@
 
 .ingi-list > div:nth-of-type(2) {
   margin-right: 0;
-}
-
-.ingi-list:hover {
-  background: lightgoldenrodyellow;
 }
 
 .ingi-list__image {

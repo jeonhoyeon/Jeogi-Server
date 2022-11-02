@@ -6,7 +6,8 @@
 .findId {
     padding: 1em 0;
     width: 30em;
-    margin: 5em auto;
+    margin: 0 auto;
+    padding-top: 10em;
     text-align: center;
 }
 

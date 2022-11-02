@@ -13,17 +13,15 @@ body {
 
 /* header start */
 .my-info__header {
-  padding: 5px 60px;
+  padding: 1em 60px;
   display: flex;
   justify-content: space-between;
-  background: #ff5757;
-  box-shadow: 0 2px 1px #ff5757;
+  background: none;
   align-items: center;
 }
 
 .my-info__header .my-info-nav__list {
   /*display: none;*/
-  background: #ff5757;
 }
 
 .my-info__header .my-info-nav__list ul li {
@@ -33,6 +31,7 @@ body {
 
 .my-info__header .my-info-nav__list ul li a {
   color: white;
+  font-size: 1.25em;
   font-weight: bold;
 }
 

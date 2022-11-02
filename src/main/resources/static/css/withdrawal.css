@@ -13,11 +13,10 @@ body {
 
 /* header start */
 .withdrawal__header {
-  padding: 5px 60px;
+  padding: 1em 60px;
   display: flex;
   justify-content: space-between;
-  background: #ff5757;
-  box-shadow: 0 2px 1px #ff5757;
+  background: none;
   align-items: center;
 }
 
@@ -27,11 +26,11 @@ body {
 }
 
 .withdrawal__header .my-info-nav__list {
-  background: #ff5757;
 }
 
 .withdrawal__header .my-info-nav__list ul li a {
   color: white;
+  font-size: 1.25em;
   font-weight: bold;
 }
 
