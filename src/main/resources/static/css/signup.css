@@ -19,7 +19,6 @@ body {
   max-width: 95%;
   margin: 0 auto;
   text-align: center;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
   border-radius: 6px;
   padding: 3em 2em;
 }
@@ -85,8 +84,8 @@ body {
   padding: 0.45rem 0.75rem;
   cursor: pointer;
   border-radius: 5px;
-  background: #ff5757;
-  color: white;
+  background: white;
+  color: #FF5757;
   transition: 0.7s;
   font-size: 0.95rem;
 }
