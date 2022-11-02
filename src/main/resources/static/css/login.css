@@ -5,9 +5,14 @@
   margin: 0;
 }
 
+body {
+  overflow: hidden;
+}
+
 .login-container {
   width: 100%;
-  margin: 5rem auto;
+  margin: 0 auto;
+  padding-top: 6em;
 }
 .login {
   width: 20rem;
