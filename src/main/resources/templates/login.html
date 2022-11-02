@@ -1,31 +1,41 @@
 <!DOCTYPE html>
 <html lang="ko">
-  <head>
-    <link rel="stylesheet" href="/css/login.css" />
-    <!-- <script src="jquery-1.7.2.min.js"></script> -->
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sign In Page</title>
-    <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon">
-  </head>
-  <body>
-    <!--login container-->
-    <div class="login-container">
-      <!-- login-->
-      <div class="login">
-        <a href="/mainPage">
-        <img
+<head>
+  <link rel="stylesheet" href="/css/login.css"/>
+  <!-- <script src="jquery-1.7.2.min.js"></script> -->
+  <meta charset="UTF-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sign In Page</title>
+  <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon">
+</head>
+<body>
+<div class="test1_0" style="position: absolute; z-index: -1;">
+
+  <lottie-player src="https://assets10.lottiefiles.com/packages/lf20_zprb9vzj.json"
+                 background="transparent"
+                 speed="1"
+                 style="border-bottom: 2px solid #eee; width: 100%; height: 100%;"
+                 loop
+                 autoplay>
+  </lottie-player>
+</div>
+<!--login container-->
+<div class="login-container">
+  <!-- login-->
+  <div class="login">
+    <a href="/mainPage">
+      <img
           src="../images/logo.png"
           alt="jeogi"
           height="50px"
           style="margin-bottom:50px"
-        />
-      </a>
-      <form action="./login" method="post" id="login-form">
-        <div class = "loginbox">
-        <input type="text" id="loginid" name="loginid" placeholder="ID" />
-        <input type="password" id="loginpw" name="loginpw" placeholder="PASSWORD" />
+      />
+    </a>
+    <form action="./login" method="post" id="login-form">
+      <div class="loginbox">
+        <input type="text" id="loginid" name="loginid" placeholder="ID"/>
+        <input type="password" id="loginpw" name="loginpw" placeholder="PASSWORD"/>
       </div>
       <div class="loginfind">
         <ul>
@@ -33,16 +43,17 @@
           <li><a href="/login/findPw">비밀번호찾기</a></li>
         </ul>
       </div>
-        <div class="login-submit">
-          <button type="button" id="loginbtn">로그인</button>
-          <!-- <button type="button"id="loginbtn"onclick="alert('로그인 완료')" >로그인</button> -->
-          <button type="button"onclick="location.href='/login/signUp'"> 회원가입</button>
-        
-      </form>
-      </div>
-      <!--login-->
-    </div>
-    <!--login container-->
-    <script src="/js/login.js"></script>
-  </body>
+      <div class="login-submit">
+        <button type="button" id="loginbtn">로그인</button>
+        <!-- <button type="button"id="loginbtn"onclick="alert('로그인 완료')" >로그인</button> -->
+        <button type="button" onclick="location.href='/login/signUp'"> 회원가입</button>
+
+    </form>
+  </div>
+  <!--login-->
+</div>
+<!--login container-->
+<script src="/js/login.js"></script>
+<script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+</body>
 </html>
