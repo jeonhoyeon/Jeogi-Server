@@ -708,15 +708,16 @@ zzim.addEventListener("click", () => {
         })
             .then((response) => response.json())
             .then((data) => {
-                console.log("flag: " + data);
                 if (Number(data) === 1) {
                     if (zzim.src === "http://localhost/images/pullheart.png") {
                         zzim.src = "http://localhost/images/heart.png";
+                        console.log("flag: " + 0);
                         alert("찜해제");
                     } else {
                         zzim.src = 'http://localhost/images/pullheart.png';
                         alert("찜 😍")
                         console.log("res: " + rId + ", cafe: " + cId);
+                        console.log("flag: " + 1);
                         console.log("성공");
                     }
                 } else {

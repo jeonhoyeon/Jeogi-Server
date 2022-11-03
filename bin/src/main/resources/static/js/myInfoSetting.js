@@ -46,7 +46,7 @@ new_nickname.addEventListener("blur", () => {
 
   console.log(new_nick);
   console.log(JSON.stringify(new_nick));
-  fetch("/myPage/myInfo/webDatasetting", {
+  fetch("/login/signUp/nickCheck", {
     method: "POST",
     headers: { "Content-type": "application.json" },
     body: JSON.stringify(new_nick),
