@@ -176,8 +176,12 @@ body {
   font-size: 1em;
   margin-bottom: 1em;
   outline: none;
+  background: white;
   border: none;
   border-radius: 5px;
+}
+
+#userGender {
 }
 
 .my-info__container input::placeholder {

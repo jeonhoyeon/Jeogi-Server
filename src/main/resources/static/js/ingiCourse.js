@@ -90,7 +90,7 @@ window.addEventListener("DOMContentLoaded", () => {
 });
 
 loginLogout.addEventListener("click", () => {
-    if (token == null) {
+    if (token === null) {
         location.href = "/login/signIn";
     } else {
         const logout = confirm("정말 떠나실 거에요? ㅠㅠ");
