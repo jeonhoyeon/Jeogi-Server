@@ -708,23 +708,23 @@ zzim.addEventListener("click", () => {
         })
             .then((response) => response.json())
             .then((data) => {
-                console.log(data);
+                console.log("flag: " + data);
                 if (Number(data) === 1) {
-                    zzim.src = 'http://localhost/images/pullheart.png';
-                    alert("찜 😍")
-                    console.log("res: " + rId + ", cafe: " + cId);
-                    console.log("성공");
+                    if (zzim.src === "http://localhost/images/pullheart.png") {
+                        zzim.src = "http://localhost/images/heart.png";
+                        alert("찜해제");
+                    } else {
+                        zzim.src = 'http://localhost/images/pullheart.png';
+                        alert("찜 😍")
+                        console.log("res: " + rId + ", cafe: " + cId);
+                        console.log("성공");
+                    }
                 } else {
                     console.log("실패");
                 }
             })
     } else {
         alert("로그인 후 이용해주세요 :)");
-        location.href="/login/signIn";
+        location.href = "/login/signIn";
     }
 })
-
-if (zzim.src === "http://localhost/images/pullheart.png") {
-    zzim.src = "http://localhost/images/heart.png";
-    alert("찜해제");
-}
