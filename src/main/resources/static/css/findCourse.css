@@ -306,12 +306,13 @@ body {
     padding: 0.25em;
     align-items: center;
     margin-bottom: 1em;
+    background: #f8edeb;
 }
 
-#placesList > li:hover {
-    transition: 0.5s all ease;
-    background: #eee;
-}
+/*#placesList > li:hover {*/
+/*    transition: 0.5s all ease;*/
+/*    background: #eee;*/
+/*}*/
 
 .info > h5 {
     font-size: 1.25em;
@@ -338,14 +339,17 @@ body {
 
 #startChoice {
     padding: 0.5em 0;
+    color: white;
 }
 
 #resChoice {
     padding: 0.5em 0;
+    color: white;
 }
 
 #cafeChoice {
     padding: 0.5em 0;
+    color: white;
 }
 
 .find-course-list {
@@ -355,9 +359,9 @@ body {
     text-align: center;
 }
 
-.find-course-list:hover {
-    background: #eee;
-}
+/*.find-course-list:hover {*/
+/*    background: #eee;*/
+/*}*/
 
 .find-course-list__image {
     width: 4.5em;

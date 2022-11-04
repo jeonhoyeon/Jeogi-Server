@@ -116,6 +116,7 @@ body {
   border-radius: 12px;
   padding: 1em;
   cursor: pointer;
+  background: #f8edeb;
 }
 
 .my-fav-list:hover {
